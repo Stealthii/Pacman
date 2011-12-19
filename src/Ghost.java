@@ -6,7 +6,7 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.util.Random;
 
-public class NewGhost extends Thread {
+public class Ghost extends Thread {
 
     private static final String IMAGE_SOURCE = "src/pacman/img/";
     boolean isRunning = true;
@@ -22,7 +22,7 @@ public class NewGhost extends Thread {
     private int ghostRow, ghostCol;
     Maze maze;
 
-    public NewGhost(int initialRow, int initialColumn, Maze startMaze, String ghostGraphic) {
+    public Ghost(int initialRow, int initialColumn, Maze startMaze, String ghostGraphic) {
         ghostRow = initialRow;
         ghostCol = initialColumn;
         maze = startMaze;
