@@ -6,7 +6,7 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.util.Random;
 
-public class Pinky extends Thread {    // pinky is the red ghost
+public class Pinky extends Thread { 
     private static final String IMAGE_SOURCE = "src/pacman/img/";
     boolean                     isRunning    = true;
 
@@ -31,10 +31,9 @@ public class Pinky extends Thread {    // pinky is the red ghost
         ghostPicIcon = Toolkit.getDefaultToolkit().getImage(IMAGE_SOURCE + "pinky.png");
     }
 
-    // draw pacman
     public void drawGhost(Graphics g) {
         g.drawImage(ghostPicIcon, ghostRow * 20, ghostCol * 20, maze);
-        g.drawRect(ghostRow * 20, ghostCol * 20, 25, 25);    // draw rectangle for collision detection
+        g.drawRect(ghostRow * 20, ghostCol * 20, 25, 25);   
     }
 
     public int getRow() {
@@ -45,17 +44,17 @@ public class Pinky extends Thread {    // pinky is the red ghost
         return ghostCol;
     }
 
-    // set the row
+
     protected void setRow(int x) {
         ghostRow = x;
     }
 
-    // set the column
+
     protected void setCol(int y) {
         ghostCol = y;
     }
 
-    // set direcetion
+
     public void setDirection(char direction) {
         this.direction = direction;
     }
@@ -113,7 +112,7 @@ public class Pinky extends Thread {    // pinky is the red ghost
     }
 
     /*
-     * Move pacman
+     * Move Ghost
      *
      */
     public void moveGhost(int x, int y) {

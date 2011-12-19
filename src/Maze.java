@@ -21,12 +21,12 @@ import javax.swing.JPanel;
  *
  */
 public final class Maze extends JPanel {
-    final static int CELL               = 20;    // cell dimension in pixels
+    final static int CELL               = 20;    
     public Ghost     currentGhost       = null;
     private int      ghostInitialColumn = 13;
 
     // GHOST INFO
-    private int ghostInitialRow = 21;    // left or right
+    private int ghostInitialRow = 21;    
     private int lives           = 0;
 
     // SOURCE OF MAP
@@ -41,18 +41,18 @@ public final class Maze extends JPanel {
 
     // SOUND EFFECTS
     String         sound = "eat.wav";
-    private Blinky blinky;    // blinky is the green ghost
+    private Blinky blinky;   
 
     /** The two-dimensional array of Cells that will make up the maze */
     private Cell[][] cells;
-    private Clyde    clyde;    // clyde is the blue ghost
+    private Clyde    clyde;    
     AudioClip        eatPelletSound;
-    private Inky     inky;     // inky is the yellow ghost
+    private Inky     inky;    
 
     //
     // PACMAN DECLARATION
     public Pacman pacman;
-    private Pinky pinky;    // pinky is the red ghost
+    private Pinky pinky;    
 
     // the height of the map in tiles (NOT pixels)
     private int tileHeight;
@@ -115,12 +115,12 @@ public final class Maze extends JPanel {
                     pacman.setDirection('l');
 
                     break;
-                }    // end case statement
-            }        // end keyPressed
-        });    // end addKeyListner
+                }   
+            }      
+        });   
         checkCollision();
         repaint();
-    }    // end Maze
+    }   
 
     /**
      * Reads from the map file and create the two dimensional array
@@ -155,7 +155,7 @@ public final class Maze extends JPanel {
             tileHeight = lineList.size();
             tileWidth  = lineList.get(0).length();
 
-            // create the cells
+            // Create the cells
             cells = new Cell[tileHeight][tileWidth];
 
             for (int row = 0; row < tileHeight; row++) {
@@ -167,11 +167,11 @@ public final class Maze extends JPanel {
                     cells[row][column] = new Cell(column, row, type);
                 }
             }
-        }    // end try
+        }   
                 catch (FileNotFoundException e) {
             System.out.println("Maze map file not found");
-        }    // end catch
-    }    // end createCellArray
+        }    
+    }   
 
     /**
      * Generic paint method
@@ -201,7 +201,7 @@ public final class Maze extends JPanel {
         blinky.drawGhost(g);
         clyde.drawGhost(g);
         pinky.drawGhost(g);
-    }    // paintComponent
+    }   
 
     public Cell[][] getCells() {
         return cells;
@@ -258,6 +258,6 @@ public final class Maze extends JPanel {
 
             // pacmanDies.play();
         }
-    }    // checkCollision
-}    // end Maze
+    }   
+}   
 

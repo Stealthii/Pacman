@@ -6,7 +6,7 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.util.Random;
 
-public class Blinky extends Thread {    // blinky is the green ghost
+public class Blinky extends Thread {   
     private static final String IMAGE_SOURCE = "src/pacman/img/";
     boolean                     isRunning    = true;
 
@@ -31,10 +31,9 @@ public class Blinky extends Thread {    // blinky is the green ghost
         ghostPicIcon = Toolkit.getDefaultToolkit().getImage(IMAGE_SOURCE + "blinky.png");
     }
 
-    // draw pacman
     public void drawGhost(Graphics g) {
         g.drawImage(ghostPicIcon, ghostRow * 20, ghostCol * 20, maze);
-        g.drawRect(ghostRow * 20, ghostCol * 20, 25, 25);    // draw rectangle for collision detection
+        g.drawRect(ghostRow * 20, ghostCol * 20, 25, 25);   
     }
 
     protected int getRow() {
@@ -45,24 +44,27 @@ public class Blinky extends Thread {    // blinky is the green ghost
         return ghostCol;
     }
 
-    // set the row
+ 
     protected void setRow(int x) {
         ghostRow = x;
     }
 
-    // set the column
+
     protected void setCol(int y) {
         ghostCol = y;
     }
 
-    // set direcetion
+
     public void setDirection(char direction) {
         this.direction = direction;
     }
 
+    /*
+     * Run  method
+     */
     @Override
     public void run() {
-        while (isRunning)    // a continuous loop
+        while (isRunning)  
         {
             int randomInt = generator.nextInt(4) + 1;
 

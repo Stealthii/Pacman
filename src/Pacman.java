@@ -9,28 +9,28 @@ public class Pacman extends Thread {
     private static final String IMAGE_SOURCE     = "src/pacman/img/";
     static String[]             pacmanSequencesL = {
 
-        // left
+       
         IMAGE_SOURCE + "pac32_left.png", IMAGE_SOURCE + "pac32_left_wide.png", IMAGE_SOURCE + "pac32_left_widest.png",
         IMAGE_SOURCE + "pacman_closed.png"
-    };    // array for pacman animation left
+    };    
     static String[] pacmanSequencesR = {
 
-        // right
+       
         IMAGE_SOURCE + "pac32_right.png", IMAGE_SOURCE + "pac32_right_widest.png",
         IMAGE_SOURCE + "pac32_right_wide.png", IMAGE_SOURCE + "pacman_closed.png"
-    };    // array for pacman animation right
+    };   
     static String[] pacmanSequencesU = {
 
-        // up
+       
         IMAGE_SOURCE + "pac32_up.png", IMAGE_SOURCE + "pac32_up_wide.png", IMAGE_SOURCE + "pac32_up_widest.png",
         IMAGE_SOURCE + "pacman_closed.png"
-    };    // array for pacman animation up
+    };  
     static String[] pacmanSequencesD = {
 
-        // down
+      
         IMAGE_SOURCE + "pac32_down.png", IMAGE_SOURCE + "pac32_down_wide.png", IMAGE_SOURCE + "pac32_down_widest.png",
         IMAGE_SOURCE + "pacman_closed.png"
-    };    // array for pacman animation down
+    };  
     int            current       = 0;
     private char   direction     = 'l';
     boolean        isRunning     = true;
@@ -73,9 +73,12 @@ public class Pacman extends Thread {
         for (int i = 0; i < pacmanSequencesD.length; i++) {
             pictureDown[i] = kit.getImage(pacmanSequencesD[i]);
         }
-    }    // Pacman
+    }    
 
-    // draw Pacman
+    /*
+     * Draw Pacman
+     * 
+     */
     public void drawPacman(Graphics g) {
         if (direction == 'u') {
             if (current > pictureUp.length - 1) {
@@ -83,7 +86,7 @@ public class Pacman extends Thread {
             }
 
             g.drawImage(pictureUp[current], pacmanRow * 20, pacmanCol * 20, 22, 22, maze);
-            g.drawRect(pacmanRow * 20, pacmanCol * 20, 25, 25);    // draw rectangle for collision detection
+            g.drawRect(pacmanRow * 20, pacmanCol * 20, 25, 25);   
         }
 
         if (direction == 'd') {
@@ -92,7 +95,7 @@ public class Pacman extends Thread {
             }
 
             g.drawImage(pictureDown[current], pacmanRow * 20, pacmanCol * 20, 22, 22, maze);
-            g.drawRect(pacmanRow * 20, pacmanCol * 20, 25, 25);    // draw rectangle for collision detection
+            g.drawRect(pacmanRow * 20, pacmanCol * 20, 25, 25);   
         }
 
         if (direction == 'l') {
@@ -101,7 +104,7 @@ public class Pacman extends Thread {
             }
 
             g.drawImage(pictureLeft[current], pacmanRow * 20, pacmanCol * 20, 22, 22, maze);
-            g.drawRect(pacmanRow * 20, pacmanCol * 20, 25, 25);    // draw rectangle for collision detection
+            g.drawRect(pacmanRow * 20, pacmanCol * 20, 25, 25);   
         }
 
         if (direction == 'r') {
@@ -110,31 +113,46 @@ public class Pacman extends Thread {
             }
 
             g.drawImage(pictureRight[current], pacmanRow * 20, pacmanCol * 20, 22, 22, maze);
-            g.drawRect(pacmanRow * 20, pacmanCol * 20, 25, 25);    // draw rectangle for collision detection
+            g.drawRect(pacmanRow * 20, pacmanCol * 20, 25, 25);    
         }
-    }    // drawPacman
+    }    
 
-    // get the currnet row
+    /*
+     * Get the current row
+     * 
+     */
     protected int getRow() {
         return pacmanRow;
     }
 
-    // get the current column
+    /*
+     * Get the current column
+     * 
+     */
     protected int getCol() {
         return pacmanCol;
     }
 
-    // set the row
+    /*
+     * Set the row
+     * 
+     */
     protected void setRow(int x) {
         pacmanRow = x;
     }
 
-    // set the column
+    /*
+     * Set the column
+     * 
+     */
     protected void setCol(int y) {
         pacmanCol = y;
     }
 
-    // set direcetion
+    /* 
+     * Set direction
+     * 
+     */
     public void setDirection(char direction) {
         this.direction = direction;
     }
@@ -194,7 +212,7 @@ public class Pacman extends Thread {
                 System.err.println(e);
             }
         }
-    }    // end run method
+    }  
 
 //  TODO - implement audio
 
@@ -218,7 +236,7 @@ public class Pacman extends Thread {
 
             // Ghost.setEdible;
         }
-    }    // eatPellet
+    }   
 
     protected Rectangle getBoundingBox() {
         return new Rectangle(pacmanRow * 20, pacmanCol * 20, 25, 25);
@@ -257,5 +275,5 @@ public class Pacman extends Thread {
     public int getLives() {
         return livesLeft;
     }
-}    // end Pacman
+}  
 

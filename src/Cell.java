@@ -4,23 +4,32 @@ import java.awt.*;
 import java.awt.geom.Ellipse2D;
 
 public class Cell {
-    final int      CELL = 20;    // cell dimension in pixels
+    final int      CELL = 20;   
     protected char type;
     protected int  x, y;
 
-    // Constructor
+    /*
+     * Constructor
+     * 
+     */
     public Cell(int x, int y, char type) {
         this.type = type;
         this.x    = x;
         this.y    = y;
     }
 
-    // get type
+    /*
+     * Gets the type
+     * 
+     */
     public char getType() {
         return type;
     }
 
-    // draw the cell
+    /*
+     * Draw the cell
+     * 
+     */
     public void drawBackground(Graphics g) {
         int xBase = 0;
         int yBase = 0;
@@ -94,7 +103,10 @@ public class Cell {
         }
     }
 
-    // draw a rounded corner 3 pixels thick
+    /*
+     * Draw 3px rounded corner
+     * 
+     */
     public void drawCorner(Graphics g, int xBase, int yBase) {
         Graphics2D g2      = (Graphics2D) g;
         Rectangle  oldClip = g.getClipBounds();

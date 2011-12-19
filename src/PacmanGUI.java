@@ -24,7 +24,7 @@ class PacmanGUI extends JFrame {
             }
         };
         SwingUtilities.invokeLater(r);
-    }    // END MAIN
+    }   
 
     public void startGUI() {
         JFrame gameBoard = new JFrame("Pacman");

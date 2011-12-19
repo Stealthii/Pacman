@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 
-public class Ghost extends Thread {    // inky is the yellow ghost
+public class Ghost extends Thread {  
     private static final String IMAGE_SOURCE = "src/pacman/img/";
     boolean                     isRunning    = true;
     private Image               blinky;
@@ -50,17 +50,17 @@ public class Ghost extends Thread {    // inky is the yellow ghost
         return ghostCol;
     }
 
-    // set the row
+
     protected void setRow(int x) {
         ghostRow = x;
     }
 
-    // set the column
+
     protected void setCol(int y) {
         ghostCol = y;
     }
 
-    // set direcetion
+
     public void setDirection(char direction) {
         this.direction = direction;
     }
@@ -70,7 +70,7 @@ public class Ghost extends Thread {    // inky is the yellow ghost
      */
     @Override
     public void run() {
-        while (isRunning)    // a continuous loop
+        while (isRunning)   
         {
             if (direction == 'u') {
                 if (isCellNavigable(ghostCol - 1, ghostRow)) {
@@ -109,11 +109,11 @@ public class Ghost extends Thread {    // inky is the yellow ghost
             } catch (InterruptedException e) {
                 System.err.println(e);
             }
-        }                    // end while loop
-    }    // END RUN
+        }                   
+    }    
 
     /*
-     * Move INKY
+     * Move Ghost
      *
      */
     public void moveGhost(int x, int y) {
@@ -138,5 +138,5 @@ public class Ghost extends Thread {    // inky is the yellow ghost
         System.out.println("ROW" + ghostRow);
         System.out.println("COL" + ghostCol);
     }
-}    // end Ghost
+}    
 
