@@ -1,14 +1,8 @@
 //~--- JDK imports ------------------------------------------------------------
 
-import java.applet.AudioClip;
-
-import java.awt.*;
-import java.awt.event.*;
-
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import javax.swing.*;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 public class Ghost extends Thread {    // inky is the yellow ghost
     private static final String IMAGE_SOURCE = "src/pacman/img/";
@@ -74,6 +68,7 @@ public class Ghost extends Thread {    // inky is the yellow ghost
     /*
      * Run  method
      */
+    @Override
     public void run() {
         while (isRunning)    // a continuous loop
         {

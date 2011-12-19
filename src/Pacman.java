@@ -1,6 +1,9 @@
 //~--- JDK imports ------------------------------------------------------------
 
-import java.awt.*;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
 
 public class Pacman extends Thread {
     private static final String IMAGE_SOURCE     = "src/pacman/img/";
@@ -139,6 +142,7 @@ public class Pacman extends Thread {
     /*
      * Run  method
      */
+    @Override
     public void run() {
         while (isRunning)    // a continuous loop
         {

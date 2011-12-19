@@ -1,7 +1,7 @@
 //~--- JDK imports ------------------------------------------------------------
 
 import java.awt.*;
-import java.awt.geom.*;
+import java.awt.geom.Ellipse2D;
 
 public class Cell {
     final int      CELL = 20;    // cell dimension in pixels

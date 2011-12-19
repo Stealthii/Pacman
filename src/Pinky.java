@@ -1,7 +1,9 @@
 //~--- JDK imports ------------------------------------------------------------
 
-import java.awt.*;
-
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.util.Random;
 
 public class Pinky extends Thread {    // pinky is the red ghost
@@ -58,12 +60,13 @@ public class Pinky extends Thread {    // pinky is the red ghost
         this.direction = direction;
     }
 
+    @Override
     public void run() {
         while (isRunning)    // a continuous loop
         {
-            int rand = generator.nextInt(4) + 1;
+            int randomInt = generator.nextInt(4) + 1;
 
-            switch (rand) {
+            switch (randomInt) {
             case (1) :
                 if (isCellNavigable(ghostCol - 1, ghostRow)) {
                     moveGhost(0, -1);

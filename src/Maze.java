@@ -1,18 +1,19 @@
 //~--- JDK imports ------------------------------------------------------------
 
 import java.applet.AudioClip;
-
-import java.awt.*;
-import java.awt.event.*;
-
-import java.io.*;
-
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 import java.net.URL;
-
-import java.util.*;
-
-import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+import javax.swing.JPanel;
 
 /**
  * Represents the maze that appears on screen. Creates the maze data using
@@ -88,6 +89,7 @@ public final class Maze extends JPanel {
  */
         this.setFocusable(true);
         this.addKeyListener(new KeyAdapter() {
+            @Override
             public void keyPressed(KeyEvent k) {
                 switch (k.getKeyCode()) {
                 case (KeyEvent.VK_KP_DOWN) :
@@ -178,6 +180,7 @@ public final class Maze extends JPanel {
      *
      * @param g Graphics object
      */
+    @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setColor(Color.BLACK);
