@@ -34,7 +34,6 @@ public class Ghost extends Thread {
 
     public void drawGhost(Graphics g) {
         g.drawImage(ghostPicIcon, ghostRow * 20, ghostCol * 20, maze);
-        g.drawRect(ghostRow * 20, ghostCol * 20, 25, 25);
     }
 
     /*

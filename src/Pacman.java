@@ -78,7 +78,6 @@ public class Pacman extends Thread {
             }
 
             g.drawImage(pictureUp[current], pacmanRow * 20, pacmanCol * 20, 22, 22, maze);
-            g.drawRect(pacmanRow * 20, pacmanCol * 20, 25, 25);
         }
 
         if (direction == 'd') {
@@ -87,7 +86,6 @@ public class Pacman extends Thread {
             }
 
             g.drawImage(pictureDown[current], pacmanRow * 20, pacmanCol * 20, 22, 22, maze);
-            g.drawRect(pacmanRow * 20, pacmanCol * 20, 25, 25);
         }
 
         if (direction == 'l') {
@@ -96,7 +94,6 @@ public class Pacman extends Thread {
             }
 
             g.drawImage(pictureLeft[current], pacmanRow * 20, pacmanCol * 20, 22, 22, maze);
-            g.drawRect(pacmanRow * 20, pacmanCol * 20, 25, 25);
         }
 
         if (direction == 'r') {
@@ -105,7 +102,6 @@ public class Pacman extends Thread {
             }
 
             g.drawImage(pictureRight[current], pacmanRow * 20, pacmanCol * 20, 22, 22, maze);
-            g.drawRect(pacmanRow * 20, pacmanCol * 20, 25, 25);
         }
     }
 
