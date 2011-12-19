@@ -43,22 +43,43 @@ public class Ghost extends Thread {
 //            break;
 //        }
 //    }//end drawGhost
+    
+    /*
+     * Get the current row
+     * 
+     */
     protected int getRow() {
         return ghostRow;
     }
 
+    /*
+     * Get the current column
+     * 
+     */
     protected int getCol() {
         return ghostCol;
     }
 
+    /*
+     * Set the row
+     * 
+     */
     protected void setRow(int x) {
         ghostRow = x;
     }
 
+    /*
+     * Set the column
+     * 
+     */
     protected void setCol(int y) {
         ghostCol = y;
     }
 
+    /* 
+     * Set direction
+     * 
+     */
     public void setDirection(char direction) {
         this.direction = direction;
     }
@@ -116,10 +137,11 @@ public class Ghost extends Thread {
     public void moveGhost(int x, int y) {
         ghostRow = ghostRow + x;
         ghostCol = ghostCol + y;
-    }    // moveGhost
+    }
 
-    /**
+    /*
      * Check whether a cell is navigable
+     * 
      */
     public boolean isCellNavigable(int column, int row) {
         if ((cells[column][row].getType() == 'o') || (cells[column][row].getType() == 'd')

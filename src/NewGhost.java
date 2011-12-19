@@ -77,7 +77,7 @@ public class NewGhost extends Thread {
     }
 
     /*
-     * Run  method
+     * Run method
      */
     @Override
     public void run() {
@@ -142,8 +142,9 @@ public class NewGhost extends Thread {
         // image = image+ 1;
     }
 
-    /**
-     *  Check whether a cell is navigable
+    /*
+     * Check whether a cell is navigable
+     * 
      */
     public boolean isCellNavigable(int column, int row) {
         if ((cells[column][row].getType() == 'o') || (cells[column][row].getType() == 'd')
