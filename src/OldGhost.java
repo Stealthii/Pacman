@@ -8,9 +8,6 @@ public class OldGhost extends Thread {
 
     private static final String IMAGE_SOURCE = "src/pacman/img/";
     boolean isRunning = true;
-    /*
-     * Run method
-     */
     private Image blinky;
     Cell[][] cells;
     private Image clyde;

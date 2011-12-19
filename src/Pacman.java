@@ -197,9 +197,8 @@ public class Pacman extends Thread {
             maze.repaint();
 
             try {
-                Thread.sleep(200);
-            } // sleep for this amount of milliseconds
-            catch (InterruptedException e) {
+                Thread.sleep(150);
+            } catch (InterruptedException e) {
                 System.err.println(e);
             }
         }
