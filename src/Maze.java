@@ -16,47 +16,41 @@ import java.util.Scanner;
 import javax.swing.JPanel;
 
 /**
- * Represents the maze that appears on screen. Creates the maze data using
- * a 2D array of Cell objects, and renders the maze on screen.
+ * Represents the maze that appears on screen. Creates the maze data using a 2D
+ * array of Cell objects, and renders the maze on screen.
  *
  */
 public final class Maze extends JPanel {
-    final static int CELL               = 20;    
-    public Ghost     currentGhost       = null;
-    private int      ghostInitialColumn = 13;
 
+    final static int CELL = 20;
+    public Ghost currentGhost = null;
+    private int ghostInitialColumn = 13;
     // GHOST INFO
-    private int ghostInitialRow = 21;    
-    private int lives           = 0;
-
+    private int ghostInitialRow = 21;
+    private int lives = 0;
     // SOURCE OF MAP
-    private String map                 = "src/pacman/levels/level1.txt/";
-    private int    pacmanInitialColumn = 7;
-
+    private String map = "src/pacman/levels/level1.txt/";
+    private int pacmanInitialColumn = 7;
     // PACMAN INFO
     private int pacmanInitialRow = 21;
-
     // INITIAL SCORE
     private int score = 0;
-
     // SOUND EFFECTS
-    String         sound = "eat.wav";
-    private Blinky blinky;   
-
-    /** The two-dimensional array of Cells that will make up the maze */
+    String sound = "eat.wav";
+    private Blinky blinky;
+    /**
+     * The two-dimensional array of Cells that will make up the maze
+     */
     private Cell[][] cells;
-    private Clyde    clyde;    
-    AudioClip        eatPelletSound;
-    private Inky     inky;    
-
+    private Clyde clyde;
+    AudioClip eatPelletSound;
+    private Inky inky;
     //
     // PACMAN DECLARATION
     public Pacman pacman;
-    private Pinky pinky;    
-
+    private Pinky pinky;
     // the height of the map in tiles (NOT pixels)
     private int tileHeight;
-
     // the width of the map in tiles (NOT pixels)
     private int tileWidth;
 
@@ -84,43 +78,44 @@ public final class Maze extends JPanel {
         // setGhost(clyde);
         clyde.start();
 
-/*
-        * Key Listeners
- */
+        /*
+         * Key Listeners
+         */
         this.setFocusable(true);
         this.addKeyListener(new KeyAdapter() {
+
             @Override
             public void keyPressed(KeyEvent k) {
                 switch (k.getKeyCode()) {
-                case (KeyEvent.VK_KP_DOWN) :
-                case (KeyEvent.VK_DOWN) :
-                    pacman.setDirection('d');
+                    case (KeyEvent.VK_KP_DOWN):
+                    case (KeyEvent.VK_DOWN):
+                        pacman.setDirection('d');
 
-                    break;
+                        break;
 
-                case (KeyEvent.VK_KP_UP) :
-                case (KeyEvent.VK_UP) :
-                    pacman.setDirection('u');
+                    case (KeyEvent.VK_KP_UP):
+                    case (KeyEvent.VK_UP):
+                        pacman.setDirection('u');
 
-                    break;
+                        break;
 
-                case (KeyEvent.VK_KP_RIGHT) :
-                case (KeyEvent.VK_RIGHT) :
-                    pacman.setDirection('r');
+                    case (KeyEvent.VK_KP_RIGHT):
+                    case (KeyEvent.VK_RIGHT):
+                        pacman.setDirection('r');
 
-                    break;
+                        break;
 
-                case (KeyEvent.VK_KP_LEFT) :
-                case (KeyEvent.VK_LEFT) :
-                    pacman.setDirection('l');
+                    case (KeyEvent.VK_KP_LEFT):
+                    case (KeyEvent.VK_LEFT):
+                        pacman.setDirection('l');
 
-                    break;
-                }   
-            }      
-        });   
+                        break;
+                }
+            }
+        });
         checkCollision();
         repaint();
-    }   
+    }
 
     /**
      * Reads from the map file and create the two dimensional array
@@ -128,7 +123,7 @@ public final class Maze extends JPanel {
     private void createCellArray(String mapFile) {
 
         // Scanner object to read from map file
-        Scanner           fileReader;
+        Scanner fileReader;
         ArrayList<String> lineList = new ArrayList<String>();
 
         // Attempt to load the maze map file
@@ -141,7 +136,6 @@ public final class Maze extends JPanel {
                 try {
                     line = fileReader.nextLine();
                 } catch (Exception eof) {
-
                     // throw new A5FatalException("Could not read resource");
                 }
 
@@ -153,7 +147,7 @@ public final class Maze extends JPanel {
             }
 
             tileHeight = lineList.size();
-            tileWidth  = lineList.get(0).length();
+            tileWidth = lineList.get(0).length();
 
             // Create the cells
             cells = new Cell[tileHeight][tileWidth];
@@ -167,16 +161,14 @@ public final class Maze extends JPanel {
                     cells[row][column] = new Cell(column, row, type);
                 }
             }
-        }   
-                catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             System.out.println("Maze map file not found");
-        }    
-    }   
+        }
+    }
 
     /**
-     * Generic paint method
-     * Iterates through each cell/tile in the 2D array, drawing each in the
-     * appropriate location on screen
+     * Generic paint method Iterates through each cell/tile in the 2D array,
+     * drawing each in the appropriate location on screen
      *
      * @param g Graphics object
      */
@@ -201,22 +193,18 @@ public final class Maze extends JPanel {
         blinky.drawGhost(g);
         clyde.drawGhost(g);
         pinky.drawGhost(g);
-    }   
+    }
 
     public Cell[][] getCells() {
         return cells;
     }
 
     public int getScore() {
-        score = pacman.getScore();
-
-        return score;
+        return pacman.getScore();
     }
 
     public int getLives() {
-        lives = pacman.getLives();
-
-        return lives;
+        return pacman.getLives();
     }
 
     public void playSound() {
@@ -232,10 +220,10 @@ public final class Maze extends JPanel {
     }
 
     public void checkCollision() {
-        Rectangle pinkyBox  = pinky.getBoundingBox();
-        Rectangle inkyBox   = inky.getBoundingBox();
+        Rectangle pinkyBox = pinky.getBoundingBox();
+        Rectangle inkyBox = inky.getBoundingBox();
         Rectangle blinkyBox = blinky.getBoundingBox();
-        Rectangle clydeBox  = clyde.getBoundingBox();
+        Rectangle clydeBox = clyde.getBoundingBox();
 
         if (pinkyBox.intersects(pacman.getBoundingBox())) {
             System.out.println("Pacman eaten by Pinky!");
@@ -258,6 +246,5 @@ public final class Maze extends JPanel {
 
             // pacmanDies.play();
         }
-    }   
-}   
-
+    }
+}
