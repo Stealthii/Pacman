@@ -6,39 +6,40 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.util.Random;
 
-public class NewGhost extends Thread {   
+public class NewGhost extends Thread {
+
     private static final String IMAGE_SOURCE = "src/pacman/img/";
-    boolean                     isRunning    = true;
+    boolean isRunning = true;
 
     /*
-     * Run  method
+     * Run method
      */
-    Random        generator = new Random();
-    public int    rand      = generator.nextInt(4) + 1;
-    Cell[][]      cells;
-    private char  direction;
+    Random generator = new Random();
+    public int rand = generator.nextInt(4) + 1;
+    Cell[][] cells;
+    private char direction;
     private Image ghostPicIcon;
-    private int   ghostRow, ghostCol;
-    Maze          maze;
+    private int ghostRow, ghostCol;
+    Maze maze;
 
     public NewGhost(int initialRow, int initialColumn, Maze startMaze, String ghostGraphic) {
         ghostRow = initialRow;
         ghostCol = initialColumn;
-        maze     = startMaze;
+        maze = startMaze;
 
         // livesLeft = lives;
-        cells        = maze.getCells();
+        cells = maze.getCells();
         ghostPicIcon = Toolkit.getDefaultToolkit().getImage(IMAGE_SOURCE + ghostGraphic);
     }
 
     public void drawGhost(Graphics g) {
         g.drawImage(ghostPicIcon, ghostRow * 20, ghostCol * 20, maze);
-        g.drawRect(ghostRow * 20, ghostCol * 20, 25, 25);   
+        g.drawRect(ghostRow * 20, ghostCol * 20, 25, 25);
     }
-    
+
     /*
      * Get the current row
-     * 
+     *
      */
     protected int getRow() {
         return ghostRow;
@@ -46,7 +47,7 @@ public class NewGhost extends Thread {
 
     /*
      * Get the current column
-     * 
+     *
      */
     protected int getCol() {
         return ghostCol;
@@ -54,7 +55,7 @@ public class NewGhost extends Thread {
 
     /*
      * Set the row
-     * 
+     *
      */
     protected void setRow(int x) {
         ghostRow = x;
@@ -62,15 +63,15 @@ public class NewGhost extends Thread {
 
     /*
      * Set the column
-     * 
+     *
      */
     protected void setCol(int y) {
         ghostCol = y;
     }
 
-    /* 
+    /*
      * Set direction
-     * 
+     *
      */
     public void setDirection(char direction) {
         this.direction = direction;
@@ -81,46 +82,45 @@ public class NewGhost extends Thread {
      */
     @Override
     public void run() {
-        while (isRunning)  
-        {
+        while (isRunning) {
             int randomInt = generator.nextInt(4) + 1;
 
             switch (randomInt) {
-            case (1) :
-                if (isCellNavigable(ghostCol - 1, ghostRow)) {
-                    moveGhost(0, -1);
-                }
+                case (1):
+                    if (isCellNavigable(ghostCol - 1, ghostRow)) {
+                        moveGhost(0, -1);
+                    }
 
-                maze.repaint();
+                    maze.repaint();
 
-                break;
+                    break;
 
-            case (2) :
-                if (isCellNavigable(ghostCol + 1, ghostRow)) {
-                    moveGhost(0, 1);
-                }
+                case (2):
+                    if (isCellNavigable(ghostCol + 1, ghostRow)) {
+                        moveGhost(0, 1);
+                    }
 
-                maze.repaint();
+                    maze.repaint();
 
-                break;
+                    break;
 
-            case (3) :
-                if (isCellNavigable(ghostCol, ghostRow - 1)) {
-                    moveGhost(-1, 0);
-                }
+                case (3):
+                    if (isCellNavigable(ghostCol, ghostRow - 1)) {
+                        moveGhost(-1, 0);
+                    }
 
-                maze.repaint();
+                    maze.repaint();
 
-                break;
+                    break;
 
-            case (4) :
-                if (isCellNavigable(ghostCol, ghostRow + 1)) {
-                    moveGhost(1, 0);
-                }
+                case (4):
+                    if (isCellNavigable(ghostCol, ghostRow + 1)) {
+                        moveGhost(1, 0);
+                    }
 
-                maze.repaint();
+                    maze.repaint();
 
-                break;
+                    break;
             }
 
             try {
@@ -144,7 +144,7 @@ public class NewGhost extends Thread {
 
     /*
      * Check whether a cell is navigable
-     * 
+     *
      */
     public boolean isCellNavigable(int column, int row) {
         if ((cells[column][row].getType() == 'o') || (cells[column][row].getType() == 'd')
