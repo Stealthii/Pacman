@@ -35,26 +35,43 @@ public class Blinky extends Thread {
         g.drawImage(ghostPicIcon, ghostRow * 20, ghostCol * 20, maze);
         g.drawRect(ghostRow * 20, ghostCol * 20, 25, 25);   
     }
-
+    
+    /*
+     * Get the current row
+     * 
+     */
     protected int getRow() {
         return ghostRow;
     }
 
+    /*
+     * Get the current column
+     * 
+     */
     protected int getCol() {
         return ghostCol;
     }
 
- 
+    /*
+     * Set the row
+     * 
+     */
     protected void setRow(int x) {
         ghostRow = x;
     }
 
-
+    /*
+     * Set the column
+     * 
+     */
     protected void setCol(int y) {
         ghostCol = y;
     }
 
-
+    /* 
+     * Set direction
+     * 
+     */
     public void setDirection(char direction) {
         this.direction = direction;
     }
@@ -115,7 +132,7 @@ public class Blinky extends Thread {
     }
 
     /*
-     * Move pacman
+     * Move Ghost
      *
      */
     public void moveGhost(int x, int y) {

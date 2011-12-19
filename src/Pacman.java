@@ -162,7 +162,7 @@ public class Pacman extends Thread {
      */
     @Override
     public void run() {
-        while (isRunning)    // a continuous loop
+        while (isRunning)
         {
             if (direction == 'u') {
                 if (isCellNavigable(pacmanCol - 1, pacmanRow)) {
@@ -219,6 +219,7 @@ public class Pacman extends Thread {
     /**
      * Check if next move will be pellet
      * Detect Collision and "eat pellet"
+     * 
      */
     public void eatPellet(int column, int row) {
         if (cells[column][row].getType() == 'd') {
@@ -255,6 +256,7 @@ public class Pacman extends Thread {
 
     /*
      *  Check whether a cell is navigable
+     * 
      */
     public boolean isCellNavigable(int column, int row) {
         if ((cells[column][row].getType() == 'o') || (cells[column][row].getType() == 'd')
@@ -267,11 +269,16 @@ public class Pacman extends Thread {
 
     /*
      * Get the current score
+     * 
      */
     public int getScore() {
         return score;
     }
 
+    /*
+     * Get number of lives left
+     * 
+     */
     public int getLives() {
         return livesLeft;
     }

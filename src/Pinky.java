@@ -6,7 +6,7 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.util.Random;
 
-public class Pinky extends Thread { 
+public class Pinky extends Thread {   
     private static final String IMAGE_SOURCE = "src/pacman/img/";
     boolean                     isRunning    = true;
 
@@ -36,32 +36,52 @@ public class Pinky extends Thread {
         g.drawRect(ghostRow * 20, ghostCol * 20, 25, 25);   
     }
 
-    public int getRow() {
+    /*
+     * Get the current row
+     * 
+     */
+    protected int getRow() {
         return ghostRow;
     }
 
-    public int getCol() {
+    /*
+     * Get the current column
+     * 
+     */
+    protected int getCol() {
         return ghostCol;
     }
 
-
+    /*
+     * Set the row
+     * 
+     */
     protected void setRow(int x) {
         ghostRow = x;
     }
 
-
+    /*
+     * Set the column
+     * 
+     */
     protected void setCol(int y) {
         ghostCol = y;
     }
 
-
+    /* 
+     * Set direction
+     * 
+     */
     public void setDirection(char direction) {
         this.direction = direction;
     }
 
+    /*
+     * Run  method
+     */
     @Override
     public void run() {
-        while (isRunning)    // a continuous loop
+        while (isRunning)  
         {
             int randomInt = generator.nextInt(4) + 1;
 
