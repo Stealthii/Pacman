@@ -37,18 +37,18 @@ public final class Maze extends JPanel {
     private int score = 0;
     // SOUND EFFECTS
     String sound = "eat.wav";
-    private Blinky blinky;
+    private NewGhost blinky;
     /**
      * The two-dimensional array of Cells that will make up the maze
      */
     private Cell[][] cells;
-    private Clyde clyde;
+    private NewGhost clyde;
     AudioClip eatPelletSound;
-    private Inky inky;
+    private NewGhost inky;
     //
     // PACMAN DECLARATION
     public Pacman pacman;
-    private Pinky pinky;
+    private NewGhost pinky;
     // the height of the map in tiles (NOT pixels)
     private int tileHeight;
     // the width of the map in tiles (NOT pixels)
@@ -63,17 +63,17 @@ public final class Maze extends JPanel {
         pacman.start();
 
 //      SETUP GHOSTS
-        inky = new Inky(ghostInitialRow, ghostInitialColumn, this);
+        inky = new NewGhost(ghostInitialRow, ghostInitialColumn, this, "inky.png");
         inky.start();
-        blinky = new Blinky(ghostInitialRow + 3, ghostInitialColumn, this);
+        blinky = new NewGhost(ghostInitialRow + 3, ghostInitialColumn, this, "blinky.png");
 
         // setGhost(blinky);
         blinky.start();
-        pinky = new Pinky(ghostInitialRow, ghostInitialColumn + 3, this);
+        pinky = new NewGhost(ghostInitialRow, ghostInitialColumn + 3, this, "pinky.png");
 
         // setGhost(pinky);
         pinky.start();
-        clyde = new Clyde(ghostInitialRow + 3, ghostInitialColumn + 3, this);
+        clyde = new NewGhost(ghostInitialRow + 3, ghostInitialColumn + 3, this, "clyde.png");
 
         // setGhost(clyde);
         clyde.start();
