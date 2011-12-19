@@ -23,7 +23,7 @@ import javax.swing.JPanel;
 public final class Maze extends JPanel {
 
     final static int CELL = 20;
-    public Ghost currentGhost = null;
+    public OldGhost currentGhost = null;
     private int ghostInitialColumn = 13;
     // GHOST INFO
     private int ghostInitialRow = 21;

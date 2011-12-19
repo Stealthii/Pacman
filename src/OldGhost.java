@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 
-public class Ghost extends Thread {
+public class OldGhost extends Thread {
 
     private static final String IMAGE_SOURCE = "src/pacman/img/";
     boolean isRunning = true;
@@ -17,7 +17,7 @@ public class Ghost extends Thread {
     Maze maze;
     private Image pinky;
 
-    public Ghost(int initialRow, int initialColumn, Maze startMaze) {
+    public OldGhost(int initialRow, int initialColumn, Maze startMaze) {
         ghostRow = initialRow;
         ghostCol = initialColumn;
         maze = startMaze;
@@ -28,7 +28,7 @@ public class Ghost extends Thread {
         clyde = Toolkit.getDefaultToolkit().getImage(IMAGE_SOURCE + "clyde.png");
     }
 
-    // draw ghost
+    // draw OldGhost
 //  public void drawGhost(Graphics g)
 //  {
 //        switch (maze.getGhost())
@@ -43,10 +43,9 @@ public class Ghost extends Thread {
 //            break;
 //        }
 //    }//end drawGhost
-    
     /*
      * Get the current row
-     * 
+     *
      */
     protected int getRow() {
         return ghostRow;
@@ -54,7 +53,7 @@ public class Ghost extends Thread {
 
     /*
      * Get the current column
-     * 
+     *
      */
     protected int getCol() {
         return ghostCol;
@@ -62,7 +61,7 @@ public class Ghost extends Thread {
 
     /*
      * Set the row
-     * 
+     *
      */
     protected void setRow(int x) {
         ghostRow = x;
@@ -70,15 +69,15 @@ public class Ghost extends Thread {
 
     /*
      * Set the column
-     * 
+     *
      */
     protected void setCol(int y) {
         ghostCol = y;
     }
 
-    /* 
+    /*
      * Set direction
-     * 
+     *
      */
     public void setDirection(char direction) {
         this.direction = direction;
@@ -131,7 +130,7 @@ public class Ghost extends Thread {
     }
 
     /*
-     * Move Ghost
+     * Move OldGhost
      *
      */
     public void moveGhost(int x, int y) {
@@ -141,7 +140,7 @@ public class Ghost extends Thread {
 
     /*
      * Check whether a cell is navigable
-     * 
+     *
      */
     public boolean isCellNavigable(int column, int row) {
         if ((cells[column][row].getType() == 'o') || (cells[column][row].getType() == 'd')
