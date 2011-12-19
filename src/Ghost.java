@@ -10,12 +10,7 @@ public class Ghost extends Thread {
 
     private static final String IMAGE_SOURCE = "src/pacman/img/";
     boolean isRunning = true;
-
-    /*
-     * Run method
-     */
-    Random generator = new Random();
-    public int rand = generator.nextInt(4) + 1;
+    Random randGen = new Random();
     Cell[][] cells;
     private char direction;
     private Image ghostPicIcon;
@@ -82,9 +77,7 @@ public class Ghost extends Thread {
     @Override
     public void run() {
         while (isRunning) {
-            int randomInt = generator.nextInt(4) + 1;
-
-            switch (randomInt) {
+            switch (randGen.nextInt(4) + 1) {
                 case (1):
                     if (isCellNavigable(ghostCol - 1, ghostRow)) {
                         moveGhost(0, -1);
