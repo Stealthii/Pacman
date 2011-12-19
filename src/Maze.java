@@ -1,6 +1,5 @@
 //~--- JDK imports ------------------------------------------------------------
 
-import java.applet.AudioClip;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -9,8 +8,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JPanel;
@@ -30,14 +27,12 @@ public final class Maze extends JPanel {
     private int pacmanInitialColumn = 7;
     private int pacmanInitialRow = 21;
     private int score = 0;
-    String sound = "eat.wav";
     public Pacman pacman;
     private Ghost inky;
     private Ghost blinky;
     private Ghost pinky;
     private Ghost clyde;
     private Cell[][] cells;
-    AudioClip eatPelletSound;
     private int tileHeight;
     private int tileWidth;
 
@@ -184,19 +179,7 @@ public final class Maze extends JPanel {
     public int getLives() {
         return pacman.getLives();
     }
-
-    public void playSound() {
-
-        // play sound
-        try {
-            URL eatGhostSound = new URL("file:" + System.getProperty("src/pacman/sounds") + "/" + sound);
-
-            eatPelletSound = java.applet.Applet.newAudioClip(eatGhostSound);
-        } catch (MalformedURLException e) {
-            System.err.println("Bad URL:" + e);
-        }
-    }
-
+    
     public void checkCollision() {
         Rectangle pinkyBox = pinky.getBoundingBox();
         Rectangle inkyBox = inky.getBoundingBox();
