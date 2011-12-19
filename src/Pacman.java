@@ -162,7 +162,7 @@ public class Pacman extends Thread {
             }
 
             eatPellet(pacmanCol, pacmanRow);
-            maze.checkCollision();
+//            maze.checkCollision();
             maze.repaint();
 
             if (direction == 'd') {
@@ -172,7 +172,7 @@ public class Pacman extends Thread {
             }
 
             eatPellet(pacmanCol, pacmanRow);
-            maze.checkCollision();
+//            maze.checkCollision();
             maze.repaint();
 
             if (direction == 'l') {
@@ -193,7 +193,7 @@ public class Pacman extends Thread {
             }
 
             eatPellet(pacmanCol, pacmanRow);
-            maze.checkCollision();
+//            maze.checkCollision();
             maze.repaint();
 
             try {
@@ -213,14 +213,14 @@ public class Pacman extends Thread {
         if (cells[column][row].getType() == 'd') {
             score += 10;
             cells[column][row].type = 'o';
-            maze.eatPelletSound.play();
+//            maze.eatPelletSound.play();
             PacmanGUI.newScore();
         }
 
         if (cells[column][row].getType() == 'p') {
             score += 50;
             cells[column][row].type = 'o';
-            maze.eatPelletSound.play();
+//            maze.eatPelletSound.play();
             PacmanGUI.newScore();
 
             // Ghost.setEdible;

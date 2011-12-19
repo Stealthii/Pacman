@@ -24,57 +24,36 @@ public final class Maze extends JPanel {
 
     final static int CELL = 20;
     private int ghostInitialColumn = 13;
-    // GHOST INFO
     private int ghostInitialRow = 21;
     private int lives = 0;
-    // SOURCE OF MAP
     private String map = "src/pacman/levels/level1.txt/";
     private int pacmanInitialColumn = 7;
-    // PACMAN INFO
     private int pacmanInitialRow = 21;
-    // INITIAL SCORE
     private int score = 0;
-    // SOUND EFFECTS
     String sound = "eat.wav";
-    private Ghost blinky;
-    /**
-     * The two-dimensional array of Cells that will make up the maze
-     */
-    private Cell[][] cells;
-    private Ghost clyde;
-    AudioClip eatPelletSound;
-    private Ghost inky;
-    //
-    // PACMAN DECLARATION
     public Pacman pacman;
+    private Ghost inky;
+    private Ghost blinky;
     private Ghost pinky;
-    // the height of the map in tiles (NOT pixels)
+    private Ghost clyde;
+    private Cell[][] cells;
+    AudioClip eatPelletSound;
     private int tileHeight;
-    // the width of the map in tiles (NOT pixels)
     private int tileWidth;
 
     public Maze() {
         createCellArray(map);
         setPreferredSize(new Dimension(CELL * tileWidth, CELL * tileHeight));
 
-//      SETUP PACMAN
         pacman = new Pacman(pacmanInitialRow, pacmanInitialColumn, this, 3);
         pacman.start();
-
-//      SETUP GHOSTS
         inky = new Ghost(ghostInitialRow, ghostInitialColumn, this, "inky.png");
         inky.start();
         blinky = new Ghost(ghostInitialRow + 3, ghostInitialColumn, this, "blinky.png");
-
-        // setGhost(blinky);
         blinky.start();
         pinky = new Ghost(ghostInitialRow, ghostInitialColumn + 3, this, "pinky.png");
-
-        // setGhost(pinky);
         pinky.start();
         clyde = new Ghost(ghostInitialRow + 3, ghostInitialColumn + 3, this, "clyde.png");
-
-        // setGhost(clyde);
         clyde.start();
 
         /*
@@ -226,7 +205,7 @@ public final class Maze extends JPanel {
 
         if (pinkyBox.intersects(pacman.getBoundingBox())) {
             System.out.println("Pacman eaten by Pinky!");
-            lives = lives - 1;
+            lives--;
 
             // pacmanDies.play();
         } else if (inkyBox.intersects(pacman.getBoundingBox())) {
