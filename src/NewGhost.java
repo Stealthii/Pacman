@@ -21,14 +21,14 @@ public class NewGhost extends Thread {
     private int   ghostRow, ghostCol;
     Maze          maze;
 
-    public NewGhost(int initialRow, int initialColumn, Maze startMaze) {
+    public NewGhost(int initialRow, int initialColumn, Maze startMaze, String ghostGraphic) {
         ghostRow = initialRow;
         ghostCol = initialColumn;
         maze     = startMaze;
 
         // livesLeft = lives;
         cells        = maze.getCells();
-        ghostPicIcon = Toolkit.getDefaultToolkit().getImage(IMAGE_SOURCE + "blinky.png");
+        ghostPicIcon = Toolkit.getDefaultToolkit().getImage(IMAGE_SOURCE + ghostGraphic);
     }
 
     public void drawGhost(Graphics g) {
