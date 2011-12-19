@@ -4,28 +4,29 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 
-public class Ghost extends Thread {  
+public class Ghost extends Thread {
+
     private static final String IMAGE_SOURCE = "src/pacman/img/";
-    boolean                     isRunning    = true;
-    private Image               blinky;
-    Cell[][]                    cells;
-    private Image               clyde;
-    private char                direction;
-    private int                 ghostRow, ghostCol;
-    private Image               inky;
-    Maze                        maze;
-    private Image               pinky;
+    boolean isRunning = true;
+    private Image blinky;
+    Cell[][] cells;
+    private Image clyde;
+    private char direction;
+    private int ghostRow, ghostCol;
+    private Image inky;
+    Maze maze;
+    private Image pinky;
 
     public Ghost(int initialRow, int initialColumn, Maze startMaze) {
         ghostRow = initialRow;
         ghostCol = initialColumn;
-        maze     = startMaze;
-        cells    = maze.getCells();
-        inky     = Toolkit.getDefaultToolkit().getImage(IMAGE_SOURCE + "inky.png");
-        pinky    = Toolkit.getDefaultToolkit().getImage(IMAGE_SOURCE + "pinky.png");
-        blinky   = Toolkit.getDefaultToolkit().getImage(IMAGE_SOURCE + "blinky.png");
-        clyde    = Toolkit.getDefaultToolkit().getImage(IMAGE_SOURCE + "clyde.png");
-    }    // end Ghost constructor
+        maze = startMaze;
+        cells = maze.getCells();
+        inky = Toolkit.getDefaultToolkit().getImage(IMAGE_SOURCE + "inky.png");
+        pinky = Toolkit.getDefaultToolkit().getImage(IMAGE_SOURCE + "pinky.png");
+        blinky = Toolkit.getDefaultToolkit().getImage(IMAGE_SOURCE + "blinky.png");
+        clyde = Toolkit.getDefaultToolkit().getImage(IMAGE_SOURCE + "clyde.png");
+    }
 
     // draw ghost
 //  public void drawGhost(Graphics g)
@@ -40,7 +41,7 @@ public class Ghost extends Thread {
 //            break;
 //            case (4): g.drawImage(clyde, ghostRow, ghostRow, maze);
 //            break;
-//        }// case statement
+//        }
 //    }//end drawGhost
     protected int getRow() {
         return ghostRow;
@@ -50,28 +51,24 @@ public class Ghost extends Thread {
         return ghostCol;
     }
 
-
     protected void setRow(int x) {
         ghostRow = x;
     }
 
-
     protected void setCol(int y) {
         ghostCol = y;
     }
-
 
     public void setDirection(char direction) {
         this.direction = direction;
     }
 
     /*
-     * Run  method
+     * Run method
      */
     @Override
     public void run() {
-        while (isRunning)   
-        {
+        while (isRunning) {
             if (direction == 'u') {
                 if (isCellNavigable(ghostCol - 1, ghostRow)) {
                     moveGhost(0, -1);
@@ -109,8 +106,8 @@ public class Ghost extends Thread {
             } catch (InterruptedException e) {
                 System.err.println(e);
             }
-        }                   
-    }    
+        }
+    }
 
     /*
      * Move Ghost
@@ -122,7 +119,7 @@ public class Ghost extends Thread {
     }    // moveGhost
 
     /**
-     *  Check whether a cell is navigable
+     * Check whether a cell is navigable
      */
     public boolean isCellNavigable(int column, int row) {
         if ((cells[column][row].getType() == 'o') || (cells[column][row].getType() == 'd')
@@ -138,5 +135,4 @@ public class Ghost extends Thread {
         System.out.println("ROW" + ghostRow);
         System.out.println("COL" + ghostCol);
     }
-}    
-
+}
