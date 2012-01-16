@@ -71,7 +71,9 @@ public class Ghost extends Thread {
      * 
      */
     protected void moveRow(int x) {
-        ghostRow = ghostRow + x;
+        if (isCellNavigable(ghostCol, ghostRow + x)) {
+            ghostRow = ghostRow + x;
+        }
     }
     
     /*
@@ -79,7 +81,9 @@ public class Ghost extends Thread {
      * 
      */
     protected void moveCol(int y) {
-        ghostCol = ghostCol + y;
+        if (isCellNavigable(ghostCol + y, ghostRow)) {
+            ghostCol = ghostCol + y;
+        }
     }
 
     /*
@@ -108,30 +112,22 @@ public class Ghost extends Thread {
             // Move
             switch (randGen.nextInt(4) + 1) {
                 case (1):
-                    if (isCellNavigable(ghostCol - 1, ghostRow)) {
-                        moveCol(-1);
-                    }
+                    moveCol(-1);
 
                     break;
 
                 case (2):
-                    if (isCellNavigable(ghostCol + 1, ghostRow)) {
-                        moveCol(1);
-                    }
+                    moveCol(1);
 
                     break;
 
                 case (3):
-                    if (isCellNavigable(ghostCol, ghostRow - 1)) {
-                        moveRow(-1);
-                    }
+                    moveRow(-1);
 
                     break;
 
                 case (4):
-                    if (isCellNavigable(ghostCol, ghostRow + 1)) {
-                        moveRow(1);
-                    }
+                    moveRow(1);
 
                     break;
             }
