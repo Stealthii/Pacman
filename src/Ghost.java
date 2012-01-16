@@ -65,6 +65,22 @@ public class Ghost extends Thread {
     protected void setCol(int y) {
         ghostCol = y;
     }
+    
+    /*
+     * Move horizontally
+     * 
+     */
+    protected void moveRow(int x) {
+        ghostRow = ghostRow + x;
+    }
+    
+    /*
+     * Move vertically
+     * 
+     */
+    protected void moveCol(int y) {
+        ghostCol = ghostCol + y;
+    }
 
     /*
      * Set direction
@@ -93,28 +109,28 @@ public class Ghost extends Thread {
             switch (randGen.nextInt(4) + 1) {
                 case (1):
                     if (isCellNavigable(ghostCol - 1, ghostRow)) {
-                        moveGhost(0, -1);
+                        moveCol(-1);
                     }
 
                     break;
 
                 case (2):
                     if (isCellNavigable(ghostCol + 1, ghostRow)) {
-                        moveGhost(0, 1);
+                        moveCol(1);
                     }
 
                     break;
 
                 case (3):
                     if (isCellNavigable(ghostCol, ghostRow - 1)) {
-                        moveGhost(-1, 0);
+                        moveRow(-1);
                     }
 
                     break;
 
                 case (4):
                     if (isCellNavigable(ghostCol, ghostRow + 1)) {
-                        moveGhost(1, 0);
+                        moveRow(1);
                     }
 
                     break;
@@ -128,17 +144,6 @@ public class Ghost extends Thread {
                 System.err.println(e);
             }
         }
-    }
-
-    /*
-     * Move Ghost
-     *
-     */
-    public void moveGhost(int x, int y) {
-        ghostRow = ghostRow + x;
-        ghostCol = ghostCol + y;
-
-        // image = image+ 1;
     }
 
     /*
