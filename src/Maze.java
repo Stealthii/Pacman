@@ -41,15 +41,18 @@ public final class Maze extends JPanel {
         setPreferredSize(new Dimension(CELL * tileWidth, CELL * tileHeight));
 
         pacman = new Pacman(pacmanInitialRow, pacmanInitialColumn, this, 3);
-        pacman.start();
         inky = new Ghost(ghostInitialRow, ghostInitialColumn, this, "inky.png");
-        inky.start();
         blinky = new Ghost(ghostInitialRow + 3, ghostInitialColumn, this, "blinky.png");
-        blinky.start();
         pinky = new Ghost(ghostInitialRow, ghostInitialColumn + 3, this, "pinky.png");
-        pinky.start();
         clyde = new Ghost(ghostInitialRow + 3, ghostInitialColumn + 3, this, "clyde.png");
+        
+        //Start ghosts first
+        inky.start();
+        blinky.start();
+        pinky.start();
         clyde.start();
+        
+        pacman.start();
 
         /*
          * Key Listeners
