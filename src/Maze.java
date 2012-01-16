@@ -203,17 +203,21 @@ public final class Maze extends JPanel {
 
         if (pinky.deadly && pinkyBox.intersects(pacman.getBoundingBox())) {
             System.out.println("Pacman eaten by Pinky!");
-            lives--;
+            loseLife();
         } else if (inky.deadly && inkyBox.intersects(pacman.getBoundingBox())) {
             System.out.println("Pacman eaten by Inky!");
-            lives = lives - 1;
+            loseLife();
         } else if (blinky.deadly && blinkyBox.intersects(pacman.getBoundingBox())) {
             System.out.println("Pacman eaten by Blinky!");
-            lives = lives - 1;
+            loseLife();
         } else if (clyde.deadly && clydeBox.intersects(pacman.getBoundingBox())) {
             System.out.println("Pacman eaten by Clyde!");
-            lives = lives - 1;
+            loseLife();
         }
+    }
+
+    public void loseLife() {
+        lives--;
 
         // Need to integrate an actual death.
         if (lives <= 0) {
