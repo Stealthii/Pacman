@@ -146,12 +146,8 @@ public class Ghost extends Thread {
      *
      */
     public boolean isCellNavigable(int column, int row) {
-        if ((cells[column][row].getType() == 'o') || (cells[column][row].getType() == 'd')
-                || (cells[column][row].getType() == 'p')) {
-            return true;
-        }
-
-        return false;
+        return (cells[column][row].getType() == 'o' || cells[column][row].getType() == 'd'
+                || cells[column][row].getType() == 'p');
     }
 
     protected Rectangle getBoundingBox() {
