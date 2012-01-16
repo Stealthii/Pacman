@@ -4,29 +4,29 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
+
 import java.util.Random;
 
 public class Ghost extends Thread {
-
-    private static final String IMAGE_SOURCE = "src/pacman/img/";
-    boolean isRunning = true;
-    Random randGen = new Random();
-    Cell[][] cells;
-    private char direction;
-    private Image ghostPicIcon;
-    private int ghostRow, ghostCol;
-    Maze maze;
-    boolean deadly = true;
-    int edibleLifetime = 10;
-    int edibleLifeRemaining = edibleLifetime;
+    private static final String IMAGE_SOURCE        = "src/pacman/img/";
+    int                         edibleLifetime      = 10;
+    boolean                     isRunning           = true;
+    Random                      randGen             = new Random();
+    int                         edibleLifeRemaining = edibleLifetime;
+    boolean                     deadly              = true;
+    Cell[][]                    cells;
+    private char                direction;
+    private Image               ghostPicIcon;
+    private int                 ghostRow, ghostCol;
+    Maze                        maze;
 
     public Ghost(int initialRow, int initialColumn, Maze startMaze, String ghostGraphic) {
         ghostRow = initialRow;
         ghostCol = initialColumn;
-        maze = startMaze;
+        maze     = startMaze;
 
         // livesLeft = lives;
-        cells = maze.getCells();
+        cells        = maze.getCells();
         ghostPicIcon = Toolkit.getDefaultToolkit().getImage(IMAGE_SOURCE + ghostGraphic);
     }
 
@@ -49,20 +49,20 @@ public class Ghost extends Thread {
     protected int getCol() {
         return ghostCol;
     }
-    
+
     /*
      * Move horizontally
-     * 
+     *
      */
     protected void moveRow(int x) {
         if (isCellNavigable(ghostCol, ghostRow + x)) {
             ghostRow = ghostRow + x;
         }
     }
-    
+
     /*
      * Move vertically
-     * 
+     *
      */
     protected void moveCol(int y) {
         if (isCellNavigable(ghostCol + y, ghostRow)) {
@@ -84,38 +84,39 @@ public class Ghost extends Thread {
     @Override
     public void run() {
         while (isRunning) {
-            
+
             // Edible processing
-            if (this.deadly==false){
+            if (this.deadly == false) {
                 this.edibleLifeRemaining--;
-                if (this.edibleLifeRemaining <= 0){
-                    this.deadly=true;
+
+                if (this.edibleLifeRemaining <= 0) {
+                    this.deadly = true;
                 }
             }
-            
+
             // Move
             switch (randGen.nextInt(4) + 1) {
-                case (1):
-                    moveCol(-1);
+            case (1) :
+                moveCol(-1);
 
-                    break;
+                break;
 
-                case (2):
-                    moveCol(1);
+            case (2) :
+                moveCol(1);
 
-                    break;
+                break;
 
-                case (3):
-                    moveRow(-1);
+            case (3) :
+                moveRow(-1);
 
-                    break;
+                break;
 
-                case (4):
-                    moveRow(1);
+            case (4) :
+                moveRow(1);
 
-                    break;
+                break;
             }
-            
+
             maze.repaint();
 
             try {
@@ -131,15 +132,15 @@ public class Ghost extends Thread {
      *
      */
     public boolean isCellNavigable(int column, int row) {
-        return (cells[column][row].getType() == 'o' || cells[column][row].getType() == 'd'
-                || cells[column][row].getType() == 'p');
+        return ((cells[column][row].getType() == 'o') || (cells[column][row].getType() == 'd')
+                || (cells[column][row].getType() == 'p'));
     }
 
     protected Rectangle getBoundingBox() {
         return new Rectangle(ghostRow, ghostCol, 25, 25);
     }
-    
-    protected void endgame(){
-        this.isRunning=false;
+
+    protected void endgame() {
+        this.isRunning = false;
     }
 }

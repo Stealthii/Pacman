@@ -1,3 +1,4 @@
+//~--- JDK imports ------------------------------------------------------------
 
 import javax.swing.SwingUtilities;
 
@@ -14,7 +15,6 @@ public class Main {
         Runnable r;
 
         r = new Runnable() {
-
             public void run() {
                 new PacmanGUI().startGUI();
             }

@@ -4,13 +4,13 @@ import java.awt.*;
 import java.awt.geom.Ellipse2D;
 
 public class Cell {
-    final int      CELL = 20;   
+    final int      CELL = 20;
     protected char type;
     protected int  x, y;
 
     /*
      * Constructor
-     * 
+     *
      */
     public Cell(int x, int y, char type) {
         this.type = type;
@@ -20,7 +20,7 @@ public class Cell {
 
     /*
      * Gets the type
-     * 
+     *
      */
     public char getType() {
         return type;
@@ -28,7 +28,7 @@ public class Cell {
 
     /*
      * Draw the cell
-     * 
+     *
      */
     public void drawBackground(Graphics g) {
         int xBase = 0;
@@ -105,7 +105,7 @@ public class Cell {
 
     /*
      * Draw 3px rounded corner
-     * 
+     *
      */
     public void drawCorner(Graphics g, int xBase, int yBase) {
         Graphics2D g2      = (Graphics2D) g;

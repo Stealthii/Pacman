@@ -6,10 +6,13 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+
 import java.io.File;
 import java.io.FileNotFoundException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import javax.swing.JPanel;
 
 /**
@@ -18,40 +21,37 @@ import javax.swing.JPanel;
  *
  */
 public final class Maze extends JPanel {
-
-    final static int CELL = 20;
-    private int ghostInitialColumn = 13;
-    private int ghostInitialRow = 21;
-    private int lives = 3;
-    private String map = "src/pacman/levels/level1.txt/";
-    private int pacmanInitialColumn = 7;
-    private int pacmanInitialRow = 21;
-    private int score = 0;
-    public Pacman pacman;
-    private Ghost inky;
-    private Ghost blinky;
-    private Ghost pinky;
-    private Ghost clyde;
+    final static int CELL                = 20;
+    private int      ghostInitialColumn  = 13;
+    private int      ghostInitialRow     = 21;
+    private int      lives               = 3;
+    private String   map                 = "src/pacman/levels/level1.txt/";
+    private int      pacmanInitialColumn = 7;
+    private int      pacmanInitialRow    = 21;
+    private int      score               = 0;
+    private Ghost    blinky;
     private Cell[][] cells;
-    private int tileHeight;
-    private int tileWidth;
+    private Ghost    clyde;
+    private Ghost    inky;
+    public Pacman    pacman;
+    private Ghost    pinky;
+    private int      tileHeight;
+    private int      tileWidth;
 
     public Maze() {
         createCellArray(map);
         setPreferredSize(new Dimension(CELL * tileWidth, CELL * tileHeight));
-
         pacman = new Pacman(pacmanInitialRow, pacmanInitialColumn, this, 3);
-        inky = new Ghost(ghostInitialRow, ghostInitialColumn, this, "inky.png");
+        inky   = new Ghost(ghostInitialRow, ghostInitialColumn, this, "inky.png");
         blinky = new Ghost(ghostInitialRow + 3, ghostInitialColumn, this, "blinky.png");
-        pinky = new Ghost(ghostInitialRow, ghostInitialColumn + 3, this, "pinky.png");
-        clyde = new Ghost(ghostInitialRow + 3, ghostInitialColumn + 3, this, "clyde.png");
-        
-        //Start ghosts first
+        pinky  = new Ghost(ghostInitialRow, ghostInitialColumn + 3, this, "pinky.png");
+        clyde  = new Ghost(ghostInitialRow + 3, ghostInitialColumn + 3, this, "clyde.png");
+
+        // Start ghosts first
         inky.start();
         blinky.start();
         pinky.start();
         clyde.start();
-        
         pacman.start();
 
         /*
@@ -59,33 +59,32 @@ public final class Maze extends JPanel {
          */
         this.setFocusable(true);
         this.addKeyListener(new KeyAdapter() {
-
             @Override
             public void keyPressed(KeyEvent k) {
                 switch (k.getKeyCode()) {
-                    case (KeyEvent.VK_KP_DOWN):
-                    case (KeyEvent.VK_DOWN):
-                        pacman.setDirection('d');
+                case (KeyEvent.VK_KP_DOWN) :
+                case (KeyEvent.VK_DOWN) :
+                    pacman.setDirection('d');
 
-                        break;
+                    break;
 
-                    case (KeyEvent.VK_KP_UP):
-                    case (KeyEvent.VK_UP):
-                        pacman.setDirection('u');
+                case (KeyEvent.VK_KP_UP) :
+                case (KeyEvent.VK_UP) :
+                    pacman.setDirection('u');
 
-                        break;
+                    break;
 
-                    case (KeyEvent.VK_KP_RIGHT):
-                    case (KeyEvent.VK_RIGHT):
-                        pacman.setDirection('r');
+                case (KeyEvent.VK_KP_RIGHT) :
+                case (KeyEvent.VK_RIGHT) :
+                    pacman.setDirection('r');
 
-                        break;
+                    break;
 
-                    case (KeyEvent.VK_KP_LEFT):
-                    case (KeyEvent.VK_LEFT):
-                        pacman.setDirection('l');
+                case (KeyEvent.VK_KP_LEFT) :
+                case (KeyEvent.VK_LEFT) :
+                    pacman.setDirection('l');
 
-                        break;
+                    break;
                 }
             }
         });
@@ -99,7 +98,7 @@ public final class Maze extends JPanel {
     private void createCellArray(String mapFile) {
 
         // Scanner object to read from map file
-        Scanner fileReader;
+        Scanner           fileReader;
         ArrayList<String> lineList = new ArrayList<String>();
 
         // Attempt to load the maze map file
@@ -112,6 +111,7 @@ public final class Maze extends JPanel {
                 try {
                     line = fileReader.nextLine();
                 } catch (Exception eof) {
+
                     // throw new A5FatalException("Could not read resource");
                 }
 
@@ -123,7 +123,7 @@ public final class Maze extends JPanel {
             }
 
             tileHeight = lineList.size();
-            tileWidth = lineList.get(0).length();
+            tileWidth  = lineList.get(0).length();
 
             // Create the cells
             cells = new Cell[tileHeight][tileWidth];
@@ -182,57 +182,47 @@ public final class Maze extends JPanel {
     public int getLives() {
         return pacman.getLives();
     }
-    
+
     public void setEdible() {
-        
-        inky.deadly=false;
-        blinky.deadly=false;
-        pinky.deadly=false;
-        clyde.deadly=false;
-        
-        inky.edibleLifeRemaining=inky.edibleLifetime;
-        blinky.edibleLifeRemaining=blinky.edibleLifetime;
-        pinky.edibleLifeRemaining=pinky.edibleLifetime;
-        clyde.edibleLifeRemaining=clyde.edibleLifetime;
-        
+        inky.deadly                = false;
+        blinky.deadly              = false;
+        pinky.deadly               = false;
+        clyde.deadly               = false;
+        inky.edibleLifeRemaining   = inky.edibleLifetime;
+        blinky.edibleLifeRemaining = blinky.edibleLifetime;
+        pinky.edibleLifeRemaining  = pinky.edibleLifetime;
+        clyde.edibleLifeRemaining  = clyde.edibleLifetime;
         System.out.println("OMNOMNOM!");
     }
-    
-    public void checkCollision() {
-        Rectangle pinkyBox = pinky.getBoundingBox();
-        Rectangle inkyBox = inky.getBoundingBox();
-        Rectangle blinkyBox = blinky.getBoundingBox();
-        Rectangle clydeBox = clyde.getBoundingBox();
 
-        if (pinky.deadly &&
-                pinkyBox.intersects(pacman.getBoundingBox())) {
+    public void checkCollision() {
+        Rectangle pinkyBox  = pinky.getBoundingBox();
+        Rectangle inkyBox   = inky.getBoundingBox();
+        Rectangle blinkyBox = blinky.getBoundingBox();
+        Rectangle clydeBox  = clyde.getBoundingBox();
+
+        if (pinky.deadly && pinkyBox.intersects(pacman.getBoundingBox())) {
             System.out.println("Pacman eaten by Pinky!");
             lives--;
-
-        } else if ( inky.deadly && 
-                inkyBox.intersects(pacman.getBoundingBox())) {
+        } else if (inky.deadly && inkyBox.intersects(pacman.getBoundingBox())) {
             System.out.println("Pacman eaten by Inky!");
             lives = lives - 1;
-
-        } else if (blinky.deadly &&
-                blinkyBox.intersects(pacman.getBoundingBox())) {
+        } else if (blinky.deadly && blinkyBox.intersects(pacman.getBoundingBox())) {
             System.out.println("Pacman eaten by Blinky!");
             lives = lives - 1;
-
-        } else if (clyde.deadly && 
-                clydeBox.intersects(pacman.getBoundingBox())) {
+        } else if (clyde.deadly && clydeBox.intersects(pacman.getBoundingBox())) {
             System.out.println("Pacman eaten by Clyde!");
             lives = lives - 1;
-
         }
-    //Need to integrate an actual death.
-    if (lives <=0){
-        inky.endgame();
-        blinky.endgame();
-        pinky.endgame();
-        clyde.endgame();
-        pacman.endgame();
-        System.out.println("All Done!");
-    }
+
+        // Need to integrate an actual death.
+        if (lives <= 0) {
+            inky.endgame();
+            blinky.endgame();
+            pinky.endgame();
+            clyde.endgame();
+            pacman.endgame();
+            System.out.println("All Done!");
+        }
     }
 }

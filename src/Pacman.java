@@ -6,48 +6,40 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 
 public class Pacman extends Thread {
-
-    private static final String IMAGE_SOURCE = "src/pacman/img/";
-    static String[] pacmanSequencesL = {
-        IMAGE_SOURCE + "pac32_left.png", IMAGE_SOURCE + "pac32_left_wide.png", IMAGE_SOURCE + "pac32_left_widest.png",
-        IMAGE_SOURCE + "pacman_closed.png"
-    };
-    static String[] pacmanSequencesR = {
-        IMAGE_SOURCE + "pac32_right.png", IMAGE_SOURCE + "pac32_right_widest.png",
-        IMAGE_SOURCE + "pac32_right_wide.png", IMAGE_SOURCE + "pacman_closed.png"
-    };
-    static String[] pacmanSequencesU = {
-        IMAGE_SOURCE + "pac32_up.png", IMAGE_SOURCE + "pac32_up_wide.png", IMAGE_SOURCE + "pac32_up_widest.png",
-        IMAGE_SOURCE + "pacman_closed.png"
-    };
-    static String[] pacmanSequencesD = {
-        IMAGE_SOURCE + "pac32_down.png", IMAGE_SOURCE + "pac32_down_wide.png", IMAGE_SOURCE + "pac32_down_widest.png",
-        IMAGE_SOURCE + "pacman_closed.png"
-    };
+    private static final String IMAGE_SOURCE     = "src/pacman/img/";
+    static String[]             pacmanSequencesL = { IMAGE_SOURCE + "pac32_left.png", IMAGE_SOURCE + "pac32_left_wide.png",
+            IMAGE_SOURCE + "pac32_left_widest.png", IMAGE_SOURCE + "pacman_closed.png" };
+    static String[] pacmanSequencesR = { IMAGE_SOURCE + "pac32_right.png", IMAGE_SOURCE + "pac32_right_widest.png",
+            IMAGE_SOURCE + "pac32_right_wide.png", IMAGE_SOURCE + "pacman_closed.png" };
+    static String[] pacmanSequencesU = { IMAGE_SOURCE + "pac32_up.png", IMAGE_SOURCE + "pac32_up_wide.png",
+            IMAGE_SOURCE + "pac32_up_widest.png", IMAGE_SOURCE + "pacman_closed.png" };
+    static String[] pacmanSequencesD = { IMAGE_SOURCE + "pac32_down.png", IMAGE_SOURCE + "pac32_down_wide.png",
+            IMAGE_SOURCE + "pac32_down_widest.png", IMAGE_SOURCE + "pacman_closed.png" };
     int current = 0;
-    //don't move until told
-    private char direction = 'x';
-    boolean isRunning = true;
-    int score = 0;
-    Image[] pictureUp = new Image[pacmanSequencesU.length];
-    Image[] pictureRight = new Image[pacmanSequencesR.length];
-    Image[] pictureLeft = new Image[pacmanSequencesL.length];
-    Image[] pictureDown = new Image[pacmanSequencesD.length];
-    int totalPictures = 0;
-    Cell[][] cells;
-    int livesLeft;
-    Maze maze;
-    private int pacmanRow, pacmanCol;
+
+    // don't move until told
+    private char   direction     = 'x';
+    boolean        isRunning     = true;
+    int            score         = 0;
+    Image[]        pictureUp     = new Image[pacmanSequencesU.length];
+    Image[]        pictureRight  = new Image[pacmanSequencesR.length];
+    Image[]        pictureLeft   = new Image[pacmanSequencesL.length];
+    Image[]        pictureDown   = new Image[pacmanSequencesD.length];
+    int            totalPictures = 0;
+    Cell[][]       cells;
+    int            livesLeft;
+    Maze           maze;
+    private int    pacmanRow, pacmanCol;
     private String score_string;
-    Thread thread;
+    Thread         thread;
 
     // int pause = 200;
     public Pacman(int initialRow, int initialColumn, Maze startMaze, int lives) {
         pacmanRow = initialRow;
         pacmanCol = initialColumn;
-        maze = startMaze;
+        maze      = startMaze;
         livesLeft = lives;
-        cells = maze.getCells();
+        cells     = maze.getCells();
 
         Toolkit kit = Toolkit.getDefaultToolkit();
 
@@ -121,20 +113,20 @@ public class Pacman extends Thread {
     protected int getCol() {
         return pacmanCol;
     }
-    
-        /*
+
+    /*
      * Move horizontally
-     * 
+     *
      */
     protected void moveRow(int x) {
         if (isCellNavigable(pacmanCol, pacmanRow + x)) {
             pacmanRow = pacmanRow + x;
         }
     }
-    
+
     /*
      * Move vertically
-     * 
+     *
      */
     protected void moveCol(int y) {
         if (isCellNavigable(pacmanCol + y, pacmanRow)) {
@@ -185,22 +177,22 @@ public class Pacman extends Thread {
     }
 
 //  TODO - implement audio
+
     /**
      * Check if next move will be pellet Detect Collision and "eat pellet"
      *
      */
     public void eatPellet(int column, int row) {
         if (cells[column][row].getType() == 'd') {
-            score += 10;
+            score                   += 10;
             cells[column][row].type = 'o';
             PacmanGUI.newScore();
         }
 
         if (cells[column][row].getType() == 'p') {
-            score += 50;
+            score                   += 50;
             cells[column][row].type = 'o';
             PacmanGUI.newScore();
-
             maze.setEdible();
         }
     }
@@ -225,8 +217,8 @@ public class Pacman extends Thread {
      *
      */
     public boolean isCellNavigable(int column, int row) {
-        return (cells[column][row].getType() == 'o' || cells[column][row].getType() == 'd'
-                || cells[column][row].getType() == 'p');
+        return ((cells[column][row].getType() == 'o') || (cells[column][row].getType() == 'd')
+                || (cells[column][row].getType() == 'p'));
     }
 
     /*
@@ -244,8 +236,8 @@ public class Pacman extends Thread {
     public int getLives() {
         return livesLeft;
     }
-    
-    protected void endgame(){
-        this.isRunning=false;
+
+    protected void endgame() {
+        this.isRunning = false;
     }
 }
