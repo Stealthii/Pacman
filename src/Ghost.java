@@ -49,22 +49,6 @@ public class Ghost extends Thread {
     protected int getCol() {
         return ghostCol;
     }
-
-    /*
-     * Set the row
-     *
-     */
-    protected void setRow(int x) {
-        ghostRow = x;
-    }
-
-    /*
-     * Set the column
-     *
-     */
-    protected void setCol(int y) {
-        ghostCol = y;
-    }
     
     /*
      * Move horizontally

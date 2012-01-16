@@ -123,22 +123,6 @@ public class Pacman extends Thread {
     }
 
     /*
-     * Set the row
-     *
-     */
-    protected void setRow(int x) {
-        pacmanRow = x;
-    }
-
-    /*
-     * Set the column
-     *
-     */
-    protected void setCol(int y) {
-        pacmanCol = y;
-    }
-
-    /*
      * Set direction
      *
      */
