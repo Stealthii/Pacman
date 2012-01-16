@@ -121,6 +121,26 @@ public class Pacman extends Thread {
     protected int getCol() {
         return pacmanCol;
     }
+    
+        /*
+     * Move horizontally
+     * 
+     */
+    protected void moveRow(int x) {
+        if (isCellNavigable(pacmanCol, pacmanRow + x)) {
+            pacmanRow = pacmanRow + x;
+        }
+    }
+    
+    /*
+     * Move vertically
+     * 
+     */
+    protected void moveCol(int y) {
+        if (isCellNavigable(pacmanCol + y, pacmanRow)) {
+            pacmanCol = pacmanCol + y;
+        }
+    }
 
     /*
      * Set direction
@@ -137,27 +157,19 @@ public class Pacman extends Thread {
     public void run() {
         while (isRunning) {
             if (direction == 'u') {
-                if (isCellNavigable(pacmanCol - 1, pacmanRow)) {
-                    movePacman(0, -1);
-                }
+                moveCol(-1);
             }
 
             if (direction == 'd') {
-                if (isCellNavigable(pacmanCol + 1, pacmanRow)) {
-                    movePacman(0, 1);
-                }
+                moveCol(1);
             }
 
             if (direction == 'l') {
-                if (isCellNavigable(pacmanCol, pacmanRow - 1)) {
-                    movePacman(-1, 0);
-                }
+                moveRow(-1);
             }
 
             if (direction == 'r') {
-                if (isCellNavigable(pacmanCol, pacmanRow + 1)) {
-                    movePacman(1, 0);
-                }
+                moveRow(1);
             }
 
             eatPellet(pacmanCol, pacmanRow);
