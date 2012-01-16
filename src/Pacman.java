@@ -25,7 +25,8 @@ public class Pacman extends Thread {
         IMAGE_SOURCE + "pacman_closed.png"
     };
     int current = 0;
-    private char direction = 'l';
+    //don't move until told
+    private char direction = 'x';
     boolean isRunning = true;
     int score = 0;
     Image[] pictureUp = new Image[pacmanSequencesU.length];
@@ -157,30 +158,17 @@ public class Pacman extends Thread {
                 }
             }
 
-            eatPellet(pacmanCol, pacmanRow);
-//            maze.checkCollision();
-            maze.repaint();
-
             if (direction == 'd') {
                 if (isCellNavigable(pacmanCol + 1, pacmanRow)) {
                     movePacman(0, 1);
                 }
             }
 
-            eatPellet(pacmanCol, pacmanRow);
-//            maze.checkCollision();
-            maze.repaint();
-
             if (direction == 'l') {
                 if (isCellNavigable(pacmanCol, pacmanRow - 1)) {
                     movePacman(-1, 0);
                 }
             }
-
-            eatPellet(pacmanCol, pacmanRow);
-
-            // maze.checkCollision();
-            maze.repaint();
 
             if (direction == 'r') {
                 if (isCellNavigable(pacmanCol, pacmanRow + 1)) {
@@ -189,7 +177,7 @@ public class Pacman extends Thread {
             }
 
             eatPellet(pacmanCol, pacmanRow);
-//            maze.checkCollision();
+            maze.checkCollision();
             maze.repaint();
 
             try {
@@ -217,7 +205,7 @@ public class Pacman extends Thread {
             cells[column][row].type = 'o';
             PacmanGUI.newScore();
 
-            // Ghost.setEdible;
+            maze.setEdible();
         }
     }
 
@@ -263,5 +251,9 @@ public class Pacman extends Thread {
      */
     public int getLives() {
         return livesLeft;
+    }
+    
+    protected void endgame(){
+        this.isRunning=false;
     }
 }

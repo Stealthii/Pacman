@@ -16,6 +16,9 @@ public class Ghost extends Thread {
     private Image ghostPicIcon;
     private int ghostRow, ghostCol;
     Maze maze;
+    boolean deadly = true;
+    int edibleLifetime = 10;
+    int edibleLifeRemaining = edibleLifetime;
 
     public Ghost(int initialRow, int initialColumn, Maze startMaze, String ghostGraphic) {
         ghostRow = initialRow;
@@ -77,13 +80,21 @@ public class Ghost extends Thread {
     @Override
     public void run() {
         while (isRunning) {
+            
+            // Edible processing
+            if (this.deadly==false){
+                this.edibleLifeRemaining--;
+                if (this.edibleLifeRemaining <= 0){
+                    this.deadly=true;
+                }
+            }
+            
+            // Move
             switch (randGen.nextInt(4) + 1) {
                 case (1):
                     if (isCellNavigable(ghostCol - 1, ghostRow)) {
                         moveGhost(0, -1);
                     }
-
-                    maze.repaint();
 
                     break;
 
@@ -92,16 +103,12 @@ public class Ghost extends Thread {
                         moveGhost(0, 1);
                     }
 
-                    maze.repaint();
-
                     break;
 
                 case (3):
                     if (isCellNavigable(ghostCol, ghostRow - 1)) {
                         moveGhost(-1, 0);
                     }
-
-                    maze.repaint();
 
                     break;
 
@@ -110,10 +117,10 @@ public class Ghost extends Thread {
                         moveGhost(1, 0);
                     }
 
-                    maze.repaint();
-
                     break;
             }
+            
+            maze.repaint();
 
             try {
                 Thread.sleep(150);
@@ -149,5 +156,9 @@ public class Ghost extends Thread {
 
     protected Rectangle getBoundingBox() {
         return new Rectangle(ghostRow, ghostCol, 25, 25);
+    }
+    
+    protected void endgame(){
+        this.isRunning=false;
     }
 }

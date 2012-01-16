@@ -22,7 +22,8 @@ class PacmanGUI extends JFrame {
 
         gameBoard.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameBoard.setLayout(
-                new BorderLayout());
+                new BorderLayout()
+                );
 
         // Reference to the maze
         gameMaze = new Maze();
@@ -45,10 +46,9 @@ class PacmanGUI extends JFrame {
                 false);
         resumeButton = new JButton("Resume");
 
-        resumeButton.setEnabled(
-                false);
-        startButton.addActionListener(
-                new ActionListener() {
+        resumeButton.setEnabled(false);
+        
+        startButton.addActionListener(new ActionListener() {
 
                     public void actionPerformed(ActionEvent e) {
 

@@ -22,7 +22,7 @@ public final class Maze extends JPanel {
     final static int CELL = 20;
     private int ghostInitialColumn = 13;
     private int ghostInitialRow = 21;
-    private int lives = 0;
+    private int lives = 3;
     private String map = "src/pacman/levels/level1.txt/";
     private int pacmanInitialColumn = 7;
     private int pacmanInitialRow = 21;
@@ -180,32 +180,56 @@ public final class Maze extends JPanel {
         return pacman.getLives();
     }
     
+    public void setEdible() {
+        
+        inky.deadly=false;
+        blinky.deadly=false;
+        pinky.deadly=false;
+        clyde.deadly=false;
+        
+        inky.edibleLifeRemaining=inky.edibleLifetime;
+        blinky.edibleLifeRemaining=blinky.edibleLifetime;
+        pinky.edibleLifeRemaining=pinky.edibleLifetime;
+        clyde.edibleLifeRemaining=clyde.edibleLifetime;
+        
+        System.out.println("OMNOMNOM!");
+    }
+    
     public void checkCollision() {
         Rectangle pinkyBox = pinky.getBoundingBox();
         Rectangle inkyBox = inky.getBoundingBox();
         Rectangle blinkyBox = blinky.getBoundingBox();
         Rectangle clydeBox = clyde.getBoundingBox();
 
-        if (pinkyBox.intersects(pacman.getBoundingBox())) {
+        if (pinky.deadly &&
+                pinkyBox.intersects(pacman.getBoundingBox())) {
             System.out.println("Pacman eaten by Pinky!");
             lives--;
 
-            // pacmanDies.play();
-        } else if (inkyBox.intersects(pacman.getBoundingBox())) {
+        } else if ( inky.deadly && 
+                inkyBox.intersects(pacman.getBoundingBox())) {
             System.out.println("Pacman eaten by Inky!");
             lives = lives - 1;
 
-            // pacmanDies.play();
-        } else if (blinkyBox.intersects(pacman.getBoundingBox())) {
+        } else if (blinky.deadly &&
+                blinkyBox.intersects(pacman.getBoundingBox())) {
             System.out.println("Pacman eaten by Blinky!");
             lives = lives - 1;
 
-            // pacmanDies.play();
-        } else if (clydeBox.intersects(pacman.getBoundingBox())) {
+        } else if (clyde.deadly && 
+                clydeBox.intersects(pacman.getBoundingBox())) {
             System.out.println("Pacman eaten by Clyde!");
             lives = lives - 1;
 
-            // pacmanDies.play();
         }
+    //Need to integrate an actual death.
+    if (lives <=0){
+        inky.endgame();
+        blinky.endgame();
+        pinky.endgame();
+        clyde.endgame();
+        pacman.endgame();
+        System.out.println("All Done!");
+    }
     }
 }
