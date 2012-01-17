@@ -197,10 +197,6 @@ public class Pacman extends Thread {
         }
     }
 
-    protected Rectangle getBoundingBox() {
-        return new Rectangle(pacmanRow * 20, pacmanCol * 20, 25, 25);
-    }
-
     /*
      * Move Pacman
      *

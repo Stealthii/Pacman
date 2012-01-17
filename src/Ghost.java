@@ -136,10 +136,6 @@ public class Ghost extends Thread {
                 || (cells[column][row].getType() == 'p'));
     }
 
-    protected Rectangle getBoundingBox() {
-        return new Rectangle(ghostRow, ghostCol, 25, 25);
-    }
-
     protected void endgame() {
         this.isRunning = false;
     }

@@ -196,21 +196,16 @@ public final class Maze extends JPanel {
     }
 
     public void checkCollision() {
-        Rectangle pinkyBox  = pinky.getBoundingBox();
-        Rectangle inkyBox   = inky.getBoundingBox();
-        Rectangle blinkyBox = blinky.getBoundingBox();
-        Rectangle clydeBox  = clyde.getBoundingBox();
-
-        if (pinky.deadly && pinkyBox.intersects(pacman.getBoundingBox())) {
+        if (pinky.deadly && (pinky.getCol() == pacman.getCol()) && (pinky.getRow() == pacman.getRow())) {
             System.out.println("Pacman eaten by Pinky!");
             loseLife();
-        } else if (inky.deadly && inkyBox.intersects(pacman.getBoundingBox())) {
+        } else if (inky.deadly && (inky.getCol() == pacman.getCol()) && (inky.getRow() == pacman.getRow())) {
             System.out.println("Pacman eaten by Inky!");
             loseLife();
-        } else if (blinky.deadly && blinkyBox.intersects(pacman.getBoundingBox())) {
+        } else if (blinky.deadly && (blinky.getCol() == pacman.getCol()) && (blinky.getRow() == pacman.getRow())) {
             System.out.println("Pacman eaten by Blinky!");
             loseLife();
-        } else if (clyde.deadly && clydeBox.intersects(pacman.getBoundingBox())) {
+        } else if (clyde.deadly && (clyde.getCol() == pacman.getCol()) && (clyde.getRow() == pacman.getRow())) {
             System.out.println("Pacman eaten by Clyde!");
             loseLife();
         }
@@ -218,15 +213,16 @@ public final class Maze extends JPanel {
 
     public void loseLife() {
         lives--;
+        PacmanGUI.newDisp();    // TODO - This doesn't appear to update lives
 
-        // Need to integrate an actual death.
+        // TODO - Need to integrate an actual death.
         if (lives <= 0) {
             inky.endgame();
             blinky.endgame();
             pinky.endgame();
             clyde.endgame();
             pacman.endgame();
-            System.out.println("All Done!");
+            System.out.println("Game Over!");
         }
     }
 }
