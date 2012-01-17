@@ -186,13 +186,13 @@ public class Pacman extends Thread {
         if (cells[column][row].getType() == 'd') {
             score                   += 10;
             cells[column][row].type = 'o';
-            PacmanGUI.newScore();
+            PacmanGUI.newDisp();
         }
 
         if (cells[column][row].getType() == 'p') {
             score                   += 50;
             cells[column][row].type = 'o';
-            PacmanGUI.newScore();
+            PacmanGUI.newDisp();
             maze.setEdible();
         }
     }

@@ -9,11 +9,10 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 class PacmanGUI extends JFrame {
-    private static JTextField currentScore;
+    private static JTextField gameDisp;
     private static Maze       gameMaze;
 
     public void startGUI() {
-        JTextField lives;
 
         // Control Button Declarations
         final JButton stopButton, startButton, pauseButton, resumeButton;
@@ -88,11 +87,11 @@ class PacmanGUI extends JFrame {
         });
 
 //      SCORE PANEL
-        JPanel scorePanel = new JPanel();
+        JPanel dispPanel = new JPanel();
 
-        scorePanel.setLayout(new FlowLayout());
-        scorePanel.setBackground(Color.BLACK);
-        gameBoard.add(scorePanel, BorderLayout.SOUTH);
+        dispPanel.setLayout(new FlowLayout());
+        dispPanel.setBackground(Color.BLACK);
+        gameBoard.add(dispPanel, BorderLayout.SOUTH);
 
 //      CONTROLS PANEL
 //              JPanel controls = new JPanel();
@@ -102,32 +101,24 @@ class PacmanGUI extends JFrame {
 //              controls.add(pauseButton);
 //              controls.add(resumeButton);
 //              controls.setBackground(Color.BLACK);
-//              scorePanel.add(controls, BorderLayout.SOUTH);//add controls to the gameboard frame
-//      Score
-        currentScore = new JTextField(10);
-        currentScore.setEditable(false);
-        currentScore.setBackground(Color.BLACK);
-        currentScore.setForeground(Color.YELLOW);
-        currentScore.setBorder(null);
-        currentScore.removeFocusListener(null);
-
-//      Lives Remaining
-        lives = new JTextField(10);
-        lives.setEditable(false);
-        lives.setBackground(Color.BLACK);
-        lives.setForeground(Color.YELLOW);
-        lives.setBorder(null);
-        currentScore.removeFocusListener(null);
-        scorePanel.add(currentScore, lives);
-        newScore();
+//              dispPanel.add(controls, BorderLayout.SOUTH);//add controls to the gameboard frame
+//      Score & Lives
+        gameDisp = new JTextField(10);
+        gameDisp.setEditable(false);
+        gameDisp.setBackground(Color.BLACK);
+        gameDisp.setForeground(Color.YELLOW);
+        gameDisp.setBorder(null);
+        gameDisp.removeFocusListener(null);
+        dispPanel.add(gameDisp);
+        newDisp();
 
 //      Display the game window on screen
         gameBoard.pack();
         gameBoard.setVisible(true);
     }
 
-    public static void newScore() {
-        currentScore.setText("Score " + gameMaze.getScore());
-        currentScore.repaint();
+    public static void newDisp() {
+        gameDisp.setText("Score " + gameMaze.getScore() + " Lives " + gameMaze.getLives());
+        gameDisp.repaint();
     }
 }
