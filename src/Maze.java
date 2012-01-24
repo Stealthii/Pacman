@@ -30,7 +30,7 @@ public final class Maze extends JPanel {
     private int      pacmanInitialRow    = 21;
     private int      score               = 0;
     private Cell[][] cells;
-    private Ghost    inky;
+    private Ghost    ghost;
     public Pacman    pacman;
     private int      tileHeight;
     private int      tileWidth;
@@ -39,10 +39,10 @@ public final class Maze extends JPanel {
         createCellArray(map);
         setPreferredSize(new Dimension(CELL * tileWidth, CELL * tileHeight));
         pacman = new Pacman(pacmanInitialRow, pacmanInitialColumn, this, 3);
-        inky   = new Ghost(ghostInitialRow, ghostInitialColumn, this, "inky.png");
+        ghost  = new Ghost(ghostInitialRow, ghostInitialColumn, this, "ghost32.png");
 
         // Start ghosts first
-        inky.start();
+        ghost.start();
         pacman.start();
 
         /*
@@ -156,7 +156,7 @@ public final class Maze extends JPanel {
 
         // Pacman.drawScore(g);
         pacman.drawPacman(g);
-        inky.drawGhost(g);
+        ghost.drawGhost(g);
     }
 
     public Cell[][] getCells() {
@@ -172,13 +172,13 @@ public final class Maze extends JPanel {
     }
 
     public void setEdible() {
-        inky.deadly              = false;
-        inky.edibleLifeRemaining = inky.edibleLifetime;
+        ghost.deadly              = false;
+        ghost.edibleLifeRemaining = ghost.edibleLifetime;
         System.out.println("OMNOMNOM!");
     }
 
     public void checkCollision() {
-        if (inky.deadly && (inky.getCol() == pacman.getCol()) && (inky.getRow() == pacman.getRow())) {
+        if (ghost.deadly && (ghost.getCol() == pacman.getCol()) && (ghost.getRow() == pacman.getRow())) {
             System.out.println("Pacman eaten by Inky!");
             loseLife();
         }
@@ -190,7 +190,7 @@ public final class Maze extends JPanel {
 
         // TODO - Need to integrate an actual death.
         if (lives <= 0) {
-            inky.endgame();
+            ghost.endgame();
             pacman.endgame();
             System.out.println("Game Over!");
         }
