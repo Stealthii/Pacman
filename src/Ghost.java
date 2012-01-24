@@ -132,8 +132,7 @@ public class Ghost extends Thread {
      *
      */
     public boolean isCellNavigable(int column, int row) {
-        return ((cells[column][row].getType() == 'o') || (cells[column][row].getType() == 'd')
-                || (cells[column][row].getType() == 'p'));
+        return (cells[column][row].getType() == 'x');
     }
 
     protected void endgame() {
