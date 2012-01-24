@@ -29,12 +29,9 @@ public final class Maze extends JPanel {
     private int      pacmanInitialColumn = 7;
     private int      pacmanInitialRow    = 21;
     private int      score               = 0;
-    private Ghost    blinky;
     private Cell[][] cells;
-    private Ghost    clyde;
     private Ghost    inky;
     public Pacman    pacman;
-    private Ghost    pinky;
     private int      tileHeight;
     private int      tileWidth;
 
@@ -43,15 +40,9 @@ public final class Maze extends JPanel {
         setPreferredSize(new Dimension(CELL * tileWidth, CELL * tileHeight));
         pacman = new Pacman(pacmanInitialRow, pacmanInitialColumn, this, 3);
         inky   = new Ghost(ghostInitialRow, ghostInitialColumn, this, "inky.png");
-        blinky = new Ghost(ghostInitialRow + 3, ghostInitialColumn, this, "blinky.png");
-        pinky  = new Ghost(ghostInitialRow, ghostInitialColumn + 3, this, "pinky.png");
-        clyde  = new Ghost(ghostInitialRow + 3, ghostInitialColumn + 3, this, "clyde.png");
 
         // Start ghosts first
         inky.start();
-        blinky.start();
-        pinky.start();
-        clyde.start();
         pacman.start();
 
         /*
@@ -166,9 +157,6 @@ public final class Maze extends JPanel {
         // Pacman.drawScore(g);
         pacman.drawPacman(g);
         inky.drawGhost(g);
-        blinky.drawGhost(g);
-        clyde.drawGhost(g);
-        pinky.drawGhost(g);
     }
 
     public Cell[][] getCells() {
@@ -184,29 +172,14 @@ public final class Maze extends JPanel {
     }
 
     public void setEdible() {
-        inky.deadly                = false;
-        blinky.deadly              = false;
-        pinky.deadly               = false;
-        clyde.deadly               = false;
-        inky.edibleLifeRemaining   = inky.edibleLifetime;
-        blinky.edibleLifeRemaining = blinky.edibleLifetime;
-        pinky.edibleLifeRemaining  = pinky.edibleLifetime;
-        clyde.edibleLifeRemaining  = clyde.edibleLifetime;
+        inky.deadly              = false;
+        inky.edibleLifeRemaining = inky.edibleLifetime;
         System.out.println("OMNOMNOM!");
     }
 
     public void checkCollision() {
-        if (pinky.deadly && (pinky.getCol() == pacman.getCol()) && (pinky.getRow() == pacman.getRow())) {
-            System.out.println("Pacman eaten by Pinky!");
-            loseLife();
-        } else if (inky.deadly && (inky.getCol() == pacman.getCol()) && (inky.getRow() == pacman.getRow())) {
+        if (inky.deadly && (inky.getCol() == pacman.getCol()) && (inky.getRow() == pacman.getRow())) {
             System.out.println("Pacman eaten by Inky!");
-            loseLife();
-        } else if (blinky.deadly && (blinky.getCol() == pacman.getCol()) && (blinky.getRow() == pacman.getRow())) {
-            System.out.println("Pacman eaten by Blinky!");
-            loseLife();
-        } else if (clyde.deadly && (clyde.getCol() == pacman.getCol()) && (clyde.getRow() == pacman.getRow())) {
-            System.out.println("Pacman eaten by Clyde!");
             loseLife();
         }
     }
@@ -218,9 +191,6 @@ public final class Maze extends JPanel {
         // TODO - Need to integrate an actual death.
         if (lives <= 0) {
             inky.endgame();
-            blinky.endgame();
-            pinky.endgame();
-            clyde.endgame();
             pacman.endgame();
             System.out.println("Game Over!");
         }
