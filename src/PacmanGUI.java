@@ -92,8 +92,9 @@ class PacmanGUI extends JFrame {
         JPanel controls = new JPanel();
 
         controls.setLayout(new FlowLayout());
-//        controls.add(startButton);
-//        controls.add(stopButton);
+
+//      controls.add(startButton);
+//      controls.add(stopButton);
         controls.add(pauseButton);
         controls.add(resumeButton);
         controls.setBackground(Color.BLACK);
