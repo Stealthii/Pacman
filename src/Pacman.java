@@ -159,7 +159,7 @@ public class Pacman extends Thread {
                 moveRow(1);
             }
 
-            maze.checkCollision();
+            maze.ghost.checkCollision(this);
             maze.repaint();
 
             try {

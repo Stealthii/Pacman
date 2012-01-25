@@ -20,21 +20,16 @@ class PacmanGUI extends JFrame {
 
         gameBoard.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameBoard.setLayout(new BorderLayout());
-
-        // Reference to the maze
         gameMaze = new Maze();
-
-        // Reference to the cells that make up the maze
-        Cell[][] cells = gameMaze.getCells();
 
         // add the maze to the game board
         gameBoard.add(gameMaze, BorderLayout.CENTER);
         startButton = new JButton("Start");
-        startButton.setEnabled(true);
+        startButton.setEnabled(false);
         stopButton = new JButton("Stop");
         stopButton.setEnabled(false);
         pauseButton = new JButton("Pause");
-        pauseButton.setEnabled(false);
+        pauseButton.setEnabled(true);
         resumeButton = new JButton("Resume");
         resumeButton.setEnabled(false);
         startButton.addActionListener(new ActionListener() {
@@ -46,7 +41,7 @@ class PacmanGUI extends JFrame {
                 startButton.setEnabled(false);
                 stopButton.setEnabled(true);
                 pauseButton.setEnabled(true);
-                resumeButton.setEnabled(true);
+                resumeButton.setEnabled(false);
             }
         });
         stopButton.addActionListener(new ActionListener() {
@@ -94,14 +89,16 @@ class PacmanGUI extends JFrame {
         gameBoard.add(dispPanel, BorderLayout.SOUTH);
 
 //      CONTROLS PANEL
-//              JPanel controls = new JPanel();
-//              controls.setLayout(new FlowLayout());
-//              controls.add(startButton);
-//              controls.add(stopButton);
-//              controls.add(pauseButton);
-//              controls.add(resumeButton);
-//              controls.setBackground(Color.BLACK);
-//              dispPanel.add(controls, BorderLayout.SOUTH);//add controls to the gameboard frame
+        JPanel controls = new JPanel();
+
+        controls.setLayout(new FlowLayout());
+//        controls.add(startButton);
+//        controls.add(stopButton);
+        controls.add(pauseButton);
+        controls.add(resumeButton);
+        controls.setBackground(Color.BLACK);
+        dispPanel.add(controls, BorderLayout.SOUTH);    // add controls to the gameboard frame
+
 //      Score & Lives
         gameDisp = new JTextField(10);
         gameDisp.setEditable(false);

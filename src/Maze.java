@@ -24,13 +24,13 @@ public final class Maze extends JPanel {
     final static int CELL                = 20;
     private int      ghostInitialColumn  = 13;
     private int      ghostInitialRow     = 21;
-    private int      lives               = 2;
+    private int      lives               = 10;
     private String   map                 = "src/pacman/levels/level1.txt/";
     private int      pacmanInitialColumn = 7;
     private int      pacmanInitialRow    = 21;
     private int      score               = 0;
     private Cell[][] cells;
-    private Ghost    ghost;
+    public Ghost     ghost;
     public Pacman    pacman;
     private int      tileHeight;
     private int      tileWidth;
@@ -163,10 +163,6 @@ public final class Maze extends JPanel {
 
     public int getLives() {
         return ghost.getLives();
-    }
-
-    public void checkCollision() {
-        ghost.checkCollision(pacman);
     }
 
     public void checkLives() {
