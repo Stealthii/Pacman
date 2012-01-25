@@ -18,27 +18,22 @@ public class Pacman extends Thread {
     int current = 0;
 
     // don't move until told
-    private char   direction     = 'x';
-    boolean        isRunning     = true;
-    int            score         = 0;
-    Image[]        pictureUp     = new Image[pacmanSequencesU.length];
-    Image[]        pictureRight  = new Image[pacmanSequencesR.length];
-    Image[]        pictureLeft   = new Image[pacmanSequencesL.length];
-    Image[]        pictureDown   = new Image[pacmanSequencesD.length];
-    int            totalPictures = 0;
-    Cell[][]       cells;
-    int            livesLeft;
-    Maze           maze;
-    private int    pacmanRow, pacmanCol;
-    private String score_string;
-    Thread         thread;
+    private char direction    = 'x';
+    boolean      isRunning    = true;
+    Image[]      pictureUp    = new Image[pacmanSequencesU.length];
+    Image[]      pictureRight = new Image[pacmanSequencesR.length];
+    Image[]      pictureLeft  = new Image[pacmanSequencesL.length];
+    Image[]      pictureDown  = new Image[pacmanSequencesD.length];
+    Cell[][]     cells;
+    Maze         maze;
+    private int  pacmanRow, pacmanCol;
+    Thread       thread;
 
     // int pause = 200;
-    public Pacman(int initialRow, int initialColumn, Maze startMaze, int lives) {
+    public Pacman(int initialRow, int initialColumn, Maze startMaze) {
         pacmanRow = initialRow;
         pacmanCol = initialColumn;
         maze      = startMaze;
-        livesLeft = lives;
         cells     = maze.getCells();
 
         Toolkit kit = Toolkit.getDefaultToolkit();
@@ -164,12 +159,11 @@ public class Pacman extends Thread {
                 moveRow(1);
             }
 
-            eatPellet(pacmanCol, pacmanRow);
             maze.checkCollision();
             maze.repaint();
 
             try {
-                Thread.sleep(150);
+                Thread.sleep(50);
             } catch (InterruptedException e) {
                 System.err.println(e);
             }
@@ -177,25 +171,6 @@ public class Pacman extends Thread {
     }
 
 //  TODO - implement audio
-
-    /**
-     * Check if next move will be pellet Detect Collision and "eat pellet"
-     *
-     */
-    public void eatPellet(int column, int row) {
-        if (cells[column][row].getType() == 'd') {
-            score                   += 10;
-            cells[column][row].type = 'o';
-            PacmanGUI.newDisp();
-        }
-
-        if (cells[column][row].getType() == 'p') {
-            score                   += 50;
-            cells[column][row].type = 'o';
-            PacmanGUI.newDisp();
-            maze.setEdible();
-        }
-    }
 
     /*
      * Move Pacman
@@ -214,22 +189,6 @@ public class Pacman extends Thread {
      */
     public boolean isCellNavigable(int column, int row) {
         return (cells[column][row].getType() == 'x');
-    }
-
-    /*
-     * Get the current score
-     *
-     */
-    public int getScore() {
-        return score;
-    }
-
-    /*
-     * Get number of lives left
-     *
-     */
-    public int getLives() {
-        return livesLeft;
     }
 
     protected void endgame() {

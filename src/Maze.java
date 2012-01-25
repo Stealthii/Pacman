@@ -24,7 +24,7 @@ public final class Maze extends JPanel {
     final static int CELL                = 20;
     private int      ghostInitialColumn  = 13;
     private int      ghostInitialRow     = 21;
-    private int      lives               = 3;
+    private int      lives               = 2;
     private String   map                 = "src/pacman/levels/level1.txt/";
     private int      pacmanInitialColumn = 7;
     private int      pacmanInitialRow    = 21;
@@ -38,8 +38,8 @@ public final class Maze extends JPanel {
     public Maze() {
         createCellArray(map);
         setPreferredSize(new Dimension(CELL * tileWidth, CELL * tileHeight));
-        pacman = new Pacman(pacmanInitialRow, pacmanInitialColumn, this, 3);
-        ghost  = new Ghost(ghostInitialRow, ghostInitialColumn, this, "ghost32.png");
+        pacman = new Pacman(pacmanInitialRow, pacmanInitialColumn, this);
+        ghost  = new Ghost(ghostInitialRow, ghostInitialColumn, this, "ghost32.png", lives);
 
         // Start ghosts first
         ghost.start();
@@ -79,8 +79,6 @@ public final class Maze extends JPanel {
                 }
             }
         });
-        checkCollision();
-        repaint();
     }
 
     /**
@@ -163,33 +161,19 @@ public final class Maze extends JPanel {
         return cells;
     }
 
-    public int getScore() {
-        return pacman.getScore();
-    }
-
     public int getLives() {
-        return pacman.getLives();
-    }
-
-    public void setEdible() {
-        ghost.deadly              = false;
-        ghost.edibleLifeRemaining = ghost.edibleLifetime;
-        System.out.println("OMNOMNOM!");
+        return ghost.getLives();
     }
 
     public void checkCollision() {
-        if (ghost.deadly && (ghost.getCol() == pacman.getCol()) && (ghost.getRow() == pacman.getRow())) {
-            System.out.println("Pacman eaten by Inky!");
-            loseLife();
-        }
+        ghost.checkCollision(pacman);
     }
 
-    public void loseLife() {
-        lives--;
+    public void checkLives() {
         PacmanGUI.newDisp();    // TODO - This doesn't appear to update lives
 
         // TODO - Need to integrate an actual death.
-        if (lives <= 0) {
+        if (ghost.lives <= 0) {
             ghost.endgame();
             pacman.endgame();
             System.out.println("Game Over!");

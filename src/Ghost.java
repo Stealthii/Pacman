@@ -8,24 +8,22 @@ import java.awt.Toolkit;
 import java.util.Random;
 
 public class Ghost extends Thread {
-    private static final String IMAGE_SOURCE        = "src/pacman/img/";
-    int                         edibleLifetime      = 10;
-    boolean                     isRunning           = true;
-    Random                      randGen             = new Random();
-    int                         edibleLifeRemaining = edibleLifetime;
-    boolean                     deadly              = true;
+    private static final String IMAGE_SOURCE = "src/pacman/img/";
+    boolean                     isRunning    = true;
+    int                         mazeheight   = 22;
+    int                         mazewidth    = 46;
+    Random                      randGen      = new Random();
     Cell[][]                    cells;
-    private char                direction;
     private Image               ghostPicIcon;
     private int                 ghostRow, ghostCol;
+    int                         lives;
     Maze                        maze;
 
-    public Ghost(int initialRow, int initialColumn, Maze startMaze, String ghostGraphic) {
-        ghostRow = initialRow;
-        ghostCol = initialColumn;
-        maze     = startMaze;
-
-        // livesLeft = lives;
+    public Ghost(int initialRow, int initialColumn, Maze startMaze, String ghostGraphic, int initialLives) {
+        ghostRow     = initialRow;
+        ghostCol     = initialColumn;
+        maze         = startMaze;
+        lives        = initialLives;
         cells        = maze.getCells();
         ghostPicIcon = Toolkit.getDefaultToolkit().getImage(IMAGE_SOURCE + ghostGraphic);
     }
@@ -51,31 +49,23 @@ public class Ghost extends Thread {
     }
 
     /*
-     * Move horizontally
+     * Set horizontal
      *
      */
-    protected void moveRow(int x) {
-        if (isCellNavigable(ghostCol, ghostRow + x)) {
-            ghostRow = ghostRow + x;
+    protected void setRow(int x) {
+        if (isCellNavigable(ghostCol, x)) {
+            ghostRow = x;
         }
     }
 
     /*
-     * Move vertically
+     * Set vertical
      *
      */
-    protected void moveCol(int y) {
-        if (isCellNavigable(ghostCol + y, ghostRow)) {
-            ghostCol = ghostCol + y;
+    protected void setCol(int y) {
+        if (isCellNavigable(y, ghostRow)) {
+            ghostCol = y;
         }
-    }
-
-    /*
-     * Set direction
-     *
-     */
-    public void setDirection(char direction) {
-        this.direction = direction;
     }
 
     /*
@@ -84,43 +74,12 @@ public class Ghost extends Thread {
     @Override
     public void run() {
         while (isRunning) {
-
-            // Edible processing
-            if (this.deadly == false) {
-                this.edibleLifeRemaining--;
-
-                if (this.edibleLifeRemaining <= 0) {
-                    this.deadly = true;
-                }
-            }
-
-            // Move
-            switch (randGen.nextInt(4) + 1) {
-            case (1) :
-                moveCol(-1);
-
-                break;
-
-            case (2) :
-                moveCol(1);
-
-                break;
-
-            case (3) :
-                moveRow(-1);
-
-                break;
-
-            case (4) :
-                moveRow(1);
-
-                break;
-            }
-
+            setCol(randGen.nextInt(mazeheight));
+            setRow(randGen.nextInt(mazewidth));
             maze.repaint();
 
             try {
-                Thread.sleep(150);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 System.err.println(e);
             }
@@ -133,6 +92,29 @@ public class Ghost extends Thread {
      */
     public boolean isCellNavigable(int column, int row) {
         return (cells[column][row].getType() == 'x');
+    }
+
+    /*
+     * Get number of lives left
+     *
+     */
+    public int getLives() {
+        return this.lives;
+    }
+
+    /*
+     * Lose a life
+     *
+     */
+    public void loseLife() {
+        this.lives -= 1;
+    }
+
+    public void checkCollision(Pacman enemy) {
+        if ((this.getCol() == enemy.getCol()) && (this.getRow() == enemy.getRow())) {
+            System.out.println("Pacman ate Ghost!");
+            loseLife();
+        }
     }
 
     protected void endgame() {
